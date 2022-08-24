@@ -1,0 +1,174 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+html{
+    font-size: 16px;
+    font-family: sans-serif;
+    line-height: 1.5;
+    -moz-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    box-sizing: border-box;
+}
+.con{
+    padding: 1rem;
+}
+/*h1, h2, p, div{
+    padding: 1rem 2rem;
+}*/
+#box{
+    border: 1px solid #999;
+}
+.menu{
+    /* width: 18rem; */
+    /*height: 4.5rem;*/
+    background-color: #f4f4f4;
+    color: #333;
+    border: 1px solid #aaa;
+    box-shadow: 2px 2px 2px #999;
+    border-radius: 0.2rem;
+    list-style: none;
+    position: fixed;
+}
+.menu.off{
+    top: -200%;
+    left: -200%;
+}
+.menu-item{
+    height: 2.5rem;
+    width: 25rem;
+    /* line-height: 2.5rem; */
+    font-size: 1rem;
+    font-weight: 100;
+    padding: 0 1rem;
+    cursor: pointer;
+}
+.menu-item:hover,
+.menu-item:active{
+    color: #000;
+    font-weight: 500;
+}
+/* div[contenteditable='true'] {
+    width: 120%;
+} */
+#containerPanel {
+    margin-left: 10%;
+}
+#container {
+    display: flex;
+}
+#parametri, .sablonOdgovora, li.menu-item {
+    font-size: medium;
+}
+.btnPovezi {
+    height: 20px !important;
+    margin: 2px !important;
+    padding: 1px !important;
+    position: absolute;
+    right: 0px;
+    font-weight: lighter;
+}
+#od, #do, #korak {
+    width: 80px;
+}
+.sablonOdgovora {
+    background-color: #c9ffe1;
+    float: left;
+    width: 480px;
+}
+.fa {
+    margin: 1%;
+}
+.liDugme {
+    color: #0000EE;
+    font-weight: lighter;
+    font-size: 14px;
+    min-width: 100%;
+}
+.bojaUpozorenje {
+    color: red;
+}
+
+.em0 {
+    background-color: aqua;
+}
+.em1 {
+    background-color: yellow;
+}
+.em2 {
+    background-color:grey;
+}
+.em3 {
+    background-color: limegreen;
+}
+.em4 {
+    background-color: teal;
+}
+.em5 {
+    background-color: red;
+}
+.em6 {
+    background-color: orange;
+}
+.em7 {
+    background-color: lightskyblue;
+}
+.em8 {
+    background-color: fuchsia;
+}
+.em9 {
+    background-color: olive;
+}
+i {
+    font-size: larger;
+}
+
+.helper {
+    font-size: 13px;
+    padding: 2%;
+    background-color: rgb(230,230,230);
+    border-radius: 10px;
+}
+.btnZatvori {
+    height: 30px;
+}
+
+.navBar {
+    display: flex;
+}
+
+table, tr, td, th {
+    border: 1px solid black;
+}
+table {
+    border-collapse: collapse;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 2;
+}
+
+.confirm-box {
+    position: absolute;
+    width: 50%;
+    height: 40%;
+    top: 25%;
+    left: 25%;
+    text-align: center;
+    background: white;
+}
+
+.close {
+cursor: pointer;
+}
