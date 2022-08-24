@@ -3,7 +3,7 @@ import { izdvojUsername, pribaviOdgovore } from './endpoints.js'
 let username, podsetnik = true
 
 window.addEventListener('load', async function () {
-    let username = izdvojUsername()
+    username = izdvojUsername()
     document.getElementById('aplikacija').href = `./app.html?username=${username}`
     document.getElementById('slobodnoKoriscenje').href = `./app.html?username=${username}`
     hj('tagRecording', [username])
