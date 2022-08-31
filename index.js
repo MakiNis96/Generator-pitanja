@@ -8,17 +8,17 @@ window.addEventListener('load', async function () {
     document.getElementById('slobodnoKoriscenje').href = `./app.html?username=${username}`
     hj('tagRecording', [username])
 
-    setInterval(otvaranjeZadatka, 10 * 1000)
+    setInterval(otvaranjeZadatka, 30 * 1000)
 })
 
 async function otvaranjeZadatka() {
     if (podsetnik) {
         closeConfirmBox()
-        const odgovori = await pribaviOdgovore(username)
-        document.getElementById('btnPrvi').innerHTML = `Zelim da uradim  
-            ${odgovori.find(odgovor => odgovor.zadatakId === 1) ? 'ponovo ' : ''} laksi zadatak`
-        document.getElementById('btnDrugi').innerHTML = `Zelim da uradim  
-            ${odgovori.find(odgovor => odgovor.zadatakId === 2) ? 'ponovo ' : ''} tezi zadatak`
+        // const odgovori = await pribaviOdgovore(username)
+        // document.getElementById('btnPrvi').innerHTML = `Zelim da uradim  
+        //     ${odgovori.find(odgovor => odgovor.zadatakId === 1) ? 'ponovo ' : ''} laksi zadatak`
+        // document.getElementById('btnDrugi').innerHTML = `Zelim da uradim  
+        //     ${odgovori.find(odgovor => odgovor.zadatakId === 2) ? 'ponovo ' : ''} tezi zadatak`
         showConfirmBox()
     }
 }

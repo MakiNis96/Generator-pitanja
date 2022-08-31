@@ -1419,12 +1419,11 @@ let podsetnik = true
 async function otvaranjeZadatka() {
     if (podsetnik) {
         closeConfirmBox()
-        const odgovori = await pribaviOdgovore(username)
-        console.log(odgovori)
-        document.getElementById('btnPrvi').innerHTML = `Zelim da uradim  
-            ${odgovori.find(odgovor => odgovor.zadatakId === 1) ? 'ponovo ' : ''} laksi zadatak`
-        document.getElementById('btnDrugi').innerHTML = `Zelim da uradim  
-            ${odgovori.find(odgovor => odgovor.zadatakId === 2) ? 'ponovo ' : ''} tezi zadatak`
+        // const odgovori = await pribaviOdgovore(username)
+        // document.getElementById('btnPrvi').innerHTML = `Zelim da uradim  
+        //     ${odgovori.find(odgovor => odgovor.zadatakId === 1) ? 'ponovo ' : ''} laksi zadatak`
+        // document.getElementById('btnDrugi').innerHTML = `Zelim da uradim  
+        //     ${odgovori.find(odgovor => odgovor.zadatakId === 2) ? 'ponovo ' : ''} tezi zadatak`
         showConfirmBox()
     }
 }
@@ -1436,7 +1435,7 @@ window.addEventListener('load', async function () {
 })
 
 if (!id) {
-    setInterval(otvaranjeZadatka, 10 * 1000)
+    setInterval(otvaranjeZadatka, 30 * 1000)
 }
 
 function showConfirmBox() {
