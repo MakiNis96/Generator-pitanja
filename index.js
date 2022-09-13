@@ -46,7 +46,8 @@ document.getElementById('btnClose').addEventListener('click', closeConfirmBox)
 
 // za postavljanje
 // http-server i json-server
-// json-server db.json
-// http-server mozda mora https, mora da se podese urlovi u hotjar i da se ubaci tracking code na stranicama
-// mora da se promeni backUrl u config fajlu
+// pokretanje http-servera: http-server -S -C cert.pem -o -c-1
+// pokretanje json-servera: npm start (pre toga npm install)
+// mora da se podese urlovi u hotjar i da se ubaci tracking code na stranicama
+// mora da se promeni backPort i backHost u config fajlu
 // otvaranje zadatka na 1min 
