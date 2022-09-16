@@ -1,7 +1,7 @@
 import { generisiPitanja, parseQuery } from './generator.js'
 import { podaci } from './podaci.js'
 import { CrtanjeHTMLElemenata } from './basic.js'
-import { posaljiOdgovor, pribaviOdgovore, izdvojUsername } from './endpoints.js'
+import { posaljiOdgovor, izdvojUsername } from './endpoints.js'
 import { zadaci } from './zadaci.js'
 
 const contextMenu = document.getElementById('menu')
@@ -302,6 +302,11 @@ function dodajSablonOdgovora(id, sablon) {
     const divSablonOdgovora = CrtanjeHTMLElemenata.nacrtajElement(konSablonOdgovora, 'div', ['konSablonOdg'])
     divSablonOdgovora.style.display = 'flex'
     const sablonOdgovora = CrtanjeHTMLElemenata.nacrtajContenteditableDiv(divSablonOdgovora, `sablonOdgovora${id && sablon ? id : ++idSablonaOdgovora}`, ['sablonOdgovora'])
+    sablonOdgovora.addEventListener("paste", (e) => {
+        e.preventDefault();
+        const text = e.clipboardData.getData('text/plain');
+        document.execCommand("insertHTML", false, text);
+    });
     if (sablon) {
         sablonOdgovora.innerHTML = sablon
     }
@@ -495,7 +500,6 @@ function oznaciParametar(div, event) { // ovo se poziva i za sablon pitanja i za
     }
     if (selection.startOffset == selection.endOffset && Object.is(selection.startContainer, selection.endContainer)) {
         // ubacivanje postojeceg parametra
-        console.log(selection)
         const startIndex = getIndexFromSelection(selection.startOffset, selection.startContainer.previousSibling, selection.startContainer.parentElement)
 
         for (const parametar of podaci.parametriPitanja) {
@@ -1383,6 +1387,12 @@ document.getElementById('zatvoriHelperSablonOdgovora').addEventListener('click',
 document.getElementById('btnObrisiModel').addEventListener('click', function () {
     window.location.reload()
 })
+
+sablon.addEventListener("paste", (e) => {
+e.preventDefault();
+    const text = e.clipboardData.getData('text/plain');
+    document.execCommand("insertHTML", false, text);
+});
 
 const urlSearchParams = window.location.search
 const params = new URLSearchParams(urlSearchParams)
