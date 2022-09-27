@@ -1,8 +1,5 @@
-// da ga ne pamti u cache: http-server -c-1
 import { Permutiranje } from "./permutiranje.js"
 import { podaci } from './podaci.js'
-
-//mora da uvedem id-jeve da bi moglo brisanje da se radi!!!
 
 const inputRezultat = document.getElementById('rezultat')
 
@@ -186,11 +183,12 @@ function generisanjeOdgovora(listaParametara) {
         // }
         // ISPRAVKA - da su delovi sablona odgovora koji treba da se evaluiraju stavljeni izmedju <i> </i>
         let transformisanOdgovorNakonEvaluacije = transformisanOdgovor.replace(/&lt;/g, '<').replace(/&gt;/g, '>')
-        while(transformisanOdgovorNakonEvaluacije.indexOf('<i contenteditable="false">') > -1) {
-            const pocetakDelaEvaluacije = transformisanOdgovorNakonEvaluacije.indexOf('<i  contenteditable="false">')
+        while(transformisanOdgovorNakonEvaluacije.indexOf('<i contenteditable\\="false" style="color\\:red">') > -1) {
+            const pocetakDelaEvaluacije = transformisanOdgovorNakonEvaluacije.indexOf('<i contenteditable\\="false" style="color\\:red">')
             const krajDelaEvaluacije = transformisanOdgovorNakonEvaluacije.indexOf('</i>')
             const deoZaZamenu = transformisanOdgovorNakonEvaluacije.substring(pocetakDelaEvaluacije, krajDelaEvaluacije + 4)
-            const zamena = transformisanOdgovorNakonEvaluacije.substring(pocetakDelaEvaluacije + 27, krajDelaEvaluacije)
+            const zamena = transformisanOdgovorNakonEvaluacije.substring(pocetakDelaEvaluacije + 28 + 19, krajDelaEvaluacije)
+            // const zamena = transformisanOdgovorNakonEvaluacije.substring(pocetakDelaEvaluacije + 28, krajDelaEvaluacije)
             // const zamena = transformisanOdgovorNakonEvaluacije.substring(pocetakDelaEvaluacije + 3, krajDelaEvaluacije)
             let zamenaEvaluacija
             try {

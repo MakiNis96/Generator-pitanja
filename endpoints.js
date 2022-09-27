@@ -23,10 +23,16 @@ function izdvojUsername() {
     const cookieUsername = cookies.find(cookie => cookie.split('=')[0].includes('username'))
     let username = cookieUsername ? cookieUsername.split('=')[1] : null
     while(!username) {
-        username = prompt('Unesite korisnicko ime')
+        username = prompt('Unesite korisnicko ime kako bismo Vas pozdravili')
         document.cookie = `username=${username}; expires=${new Date(9999, 0, 1).toUTCString()}`
     }
     return username
 }
 
-export { posaljiOdgovor, pribaviOdgovore, izdvojUsername }   
+function alertKviz() {
+    alert('Od sada u meniju imate i opciju "Uradi kviz" odakle možete da otvorite i probate da uradite naše zadatke.')
+}
+
+const timeout = 60 * 1000
+
+export { posaljiOdgovor, pribaviOdgovore, izdvojUsername, alertKviz, timeout }   

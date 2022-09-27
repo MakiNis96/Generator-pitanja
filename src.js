@@ -1,7 +1,7 @@
 import { generisiPitanja, parseQuery } from './generator.js'
 import { podaci } from './podaci.js'
 import { CrtanjeHTMLElemenata } from './basic.js'
-import { posaljiOdgovor, izdvojUsername } from './endpoints.js'
+import { posaljiOdgovor, izdvojUsername, alertKviz, timeout } from './endpoints.js'
 import { zadaci } from './zadaci.js'
 
 const contextMenu = document.getElementById('menu')
@@ -492,7 +492,7 @@ function oznaciParametar(div, event) { // ovo se poziva i za sablon pitanja i za
         btnObrisi.addEventListener('click', () => {
             contextMenu.style.display = 'none'
             // brise mu se <i> tag
-            const noviSablon = div.innerHTML.replace(`<i contenteditable="false">${deoEvaluacija}</i>`, deoEvaluacija)
+            const noviSablon = div.innerHTML.replace(`<i contenteditable="false" style="color:red">${deoEvaluacija}</i>`, deoEvaluacija)
             div.innerHTML = noviSablon
         })
 
@@ -546,7 +546,7 @@ function oznaciParametar(div, event) { // ovo se poziva i za sablon pitanja i za
             const startIndex = getIndexFromSelection(selection.startOffset, selection.startContainer.previousSibling, selection.startContainer.parentElement)
             const endIndex = getIndexFromSelection(selection.endOffset, selection.endContainer.previousSibling, selection.endContainer.parentElement) 
             const selectedPart = sablonValue.substring(startIndex, endIndex)
-            if (selectedPart.indexOf('<i contenteditable="false">') > -1 || selectedPart.indexOf('</i>') > -1) {
+            if (selectedPart.indexOf('<i contenteditable="false" style="color:red">') > -1 || selectedPart.indexOf('</i>') > -1) {
                 greskaEval = true
             }
             if (selectedPart.indexOf('<em contenteditable="false" class=') > -1 || selectedPart.indexOf('</em>') > -1) {
@@ -594,11 +594,11 @@ function oznaciParametar(div, event) { // ovo se poziva i za sablon pitanja i za
             const startIndex = getIndexFromSelection(selection.startOffset, selection.startContainer.previousSibling, selection.startContainer.parentElement)
             const endIndex = getIndexFromSelection(selection.endOffset, selection.endContainer.previousSibling, selection.endContainer.parentElement)
             const selectedPart = sablonValue.substring(startIndex, endIndex)
-            if (selectedPart.indexOf('<i contenteditable="false">') > -1) {
+            if (selectedPart.indexOf('<i contenteditable="false" style="color:red">') > -1) {
                 alert('Selektovani deo vec sadrzi deo koji treba da se evaluira')
                 return
             }
-            div.innerHTML = `${sablonValue.substring(0, startIndex)}<i contenteditable="false">${selectedPart}</i>${sablonValue.substring(endIndex)}`
+            div.innerHTML = `${sablonValue.substring(0, startIndex)}<i contenteditable="false" style="color:red">${selectedPart}</i>${sablonValue.substring(endIndex)}`
         })
     }
 }
@@ -1400,7 +1400,7 @@ const id = Number(params.get('id'))
 
 const divZadatak = document.getElementById('div-zadatak')
 const btnPosalji = document.getElementById('posaljiOdgovor')
-btnPosalji.innerHTML = id ? 'Posalji odgovor' : 'Posalji model pitanja'
+btnPosalji.style.display = id ? 'block' : 'none'
 if (id) {
     divZadatak.style.display = 'block'
     divZadatak.innerHTML = zadaci[id-1]
@@ -1425,27 +1425,28 @@ btnPosalji.addEventListener('click', async function () {
     }
 })
 
-let podsetnik = true
+const uradiKviz = document.getElementById('uradiKviz')
+if (id) {
+    uradiKviz.style.display = 'block'
+}
+// let podsetnik = true
 async function otvaranjeZadatka() {
-    if (podsetnik) {
+    // if (podsetnik) {
         closeConfirmBox()
-        // const odgovori = await pribaviOdgovore(username)
-        // document.getElementById('btnPrvi').innerHTML = `Zelim da uradim  
-        //     ${odgovori.find(odgovor => odgovor.zadatakId === 1) ? 'ponovo ' : ''} laksi zadatak`
-        // document.getElementById('btnDrugi').innerHTML = `Zelim da uradim  
-        //     ${odgovori.find(odgovor => odgovor.zadatakId === 2) ? 'ponovo ' : ''} tezi zadatak`
         showConfirmBox()
-    }
+        uradiKviz.style.display = 'block'
+    // }
 }
 
 let username
 window.addEventListener('load', async function () {
     username = izdvojUsername()
+    document.getElementById('pozdrav').innerHTML = username
     hj('tagRecording', [username])
 })
 
 if (!id) {
-    setInterval(otvaranjeZadatka, 30 * 1000)
+    setTimeout(otvaranjeZadatka, timeout)
 }
 
 function showConfirmBox() {
@@ -1457,16 +1458,27 @@ function closeConfirmBox() {
 
 function otvoriZadatak(idZadatka) {
     closeConfirmBox();
-    window.location = `./app.html?id=${idZadatka}`
+    window.open(`./app.html?id=${idZadatka}`, '_target')
 }
  
-document.getElementById('btnPrvi').addEventListener('click', () => otvoriZadatak('1'))
-document.getElementById('btnDrugi').addEventListener('click', () => otvoriZadatak('2'))
-document.getElementById('btnPodseti').addEventListener('click', closeConfirmBox)
-document.getElementById('btnNe').addEventListener('click', () => {
-    closeConfirmBox()
-    podsetnik = false
+document.getElementById('btnPrvi').addEventListener('click', () => {
+    alertKviz()
+    otvoriZadatak('1')
 })
+document.getElementById('btnDrugi').addEventListener('click', () => {
+    alertKviz()
+    otvoriZadatak('2')
+})
+document.getElementById('btnPodseti').addEventListener('click',  () => {
+    alertKviz()
+    closeConfirmBox()
+    setTimeout(otvaranjeZadatka, timeout)
+})
+document.getElementById('btnNe').addEventListener('click', () => {
+    alertKviz()
+    closeConfirmBox()
+})
+
 document.getElementById('btnClose').addEventListener('click', () => {
     closeConfirmBox()
     closeDialog2()
@@ -1480,6 +1492,10 @@ function closeDialog2() {
 }
 document.getElementById('btnYes').addEventListener('click', () => otvoriZadatak(2))
 document.getElementById('btnNo').addEventListener('click', closeDialog2)
+
+if (id) {
+    document.getElementById('tekstZadatak').style.display = 'block'
+}
 
 // const primerModelaPitanja = document.getElementById('primerModelaPitanja')
 // document.getElementById('otvoriPrimerModelaPitanja').addEventListener('click', function () {

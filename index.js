@@ -1,26 +1,25 @@
-import { izdvojUsername, pribaviOdgovore } from './endpoints.js'
+import { alertKviz, izdvojUsername, pribaviOdgovore, timeout } from './endpoints.js'
 
-let username, podsetnik = true
+let username// , podsetnik = true
 
 window.addEventListener('load', async function () {
     username = izdvojUsername()
     document.getElementById('aplikacija').href = `./app.html?username=${username}`
     document.getElementById('slobodnoKoriscenje').href = `./app.html?username=${username}`
+    document.getElementById('pozdrav').innerHTML = username
     hj('tagRecording', [username])
 
-    setInterval(otvaranjeZadatka, 30 * 1000)
+    setTimeout(otvaranjeZadatka, timeout)
 })
 
+const uradiKviz = document.getElementById('uradiKviz')
+
 async function otvaranjeZadatka() {
-    if (podsetnik) {
+    // if (podsetnik) {
         closeConfirmBox()
-        // const odgovori = await pribaviOdgovore(username)
-        // document.getElementById('btnPrvi').innerHTML = `Zelim da uradim  
-        //     ${odgovori.find(odgovor => odgovor.zadatakId === 1) ? 'ponovo ' : ''} laksi zadatak`
-        // document.getElementById('btnDrugi').innerHTML = `Zelim da uradim  
-        //     ${odgovori.find(odgovor => odgovor.zadatakId === 2) ? 'ponovo ' : ''} tezi zadatak`
         showConfirmBox()
-    }
+        uradiKviz.style.display = 'block'
+    // }
 }
 
 function showConfirmBox() {
@@ -32,17 +31,26 @@ function closeConfirmBox() {
 
 function otvoriZadatak(idZadatka) {
     closeConfirmBox();
-    window.location = `./app.html?id=${idZadatka}`
+    window.open(`./app.html?id=${idZadatka}`, '_target')
 }
  
-document.getElementById('btnPrvi').addEventListener('click', () => otvoriZadatak('1'))
-document.getElementById('btnDrugi').addEventListener('click', () => otvoriZadatak('2'))
-document.getElementById('btnPodseti').addEventListener('click', closeConfirmBox)
-document.getElementById('btnNe').addEventListener('click', () => {
-    closeConfirmBox()
-    podsetnik = false
+document.getElementById('btnPrvi').addEventListener('click', () => {
+    alertKviz()
+    otvoriZadatak('1')
 })
-document.getElementById('btnClose').addEventListener('click', closeConfirmBox)
+document.getElementById('btnDrugi').addEventListener('click', () => {
+    alertKviz()
+    otvoriZadatak('2')
+})
+document.getElementById('btnPodseti').addEventListener('click', () => {
+    alertKviz()
+    closeConfirmBox()
+    setTimeout(otvaranjeZadatka, timeout)
+})
+document.getElementById('btnNe').addEventListener('click', () => {
+    alertKviz()
+    closeConfirmBox()
+})
 
 // za postavljanje
 // http-server i json-server
@@ -51,3 +59,6 @@ document.getElementById('btnClose').addEventListener('click', closeConfirmBox)
 // mora da se podese urlovi u hotjar i da se ubaci tracking code na stranicama
 // mora da se promeni backPort i backHost u config fajlu
 // otvaranje zadatka na 1min 
+
+// interfejs promene:
+// da mu kazem da je gore link uvek nakon pojave dijaloga podseti, ne podsecaj i to

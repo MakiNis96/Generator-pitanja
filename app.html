@@ -34,16 +34,60 @@
     </head>
     <body>
         <nav class="navbar bg-warning">
-            <ul class="navBar" style="list-style:none">
-                <li><a class="navbar-brand" href="./">Uputstvo</a></li>
-                <li><a class="navbar-brand" href="./app.html" id="aplikacija">Aplikacija</a></li>
+            <ul style="list-style:none">
+                <div style="display:flex;justify-content: space-between;">
+                    <div style="display:flex">
+                        <li><a class="navbar-brand" href="./">Uputstvo</a></li>
+                        <li><a class="navbar-brand" href="./app.html" id="aplikacija">Aplikacija</a></li>
+                        <li style="display:none" id="uradiKviz">
+                            <a class="navbar-brand" style="width:150px" onclick="prosiri()">
+                                Uradi kviz
+                                <span class="fa fa-angle-double-down" id="spanKviz"></span>
+                            </a>
+                            <ul style="list-style:none;display: none;" id="kviz">
+                                <li><a class="navbar-brand" href="./app.html?id=1">Laksi zadatak</a></li>
+                                <li><a class="navbar-brand" href="./app.html?id=2">Tezi zadatak</a></li>
+                            </ul>
+                        </li>
+                    </div>
+                    <div>
+                        <li><a class="navbar-brand">Pozdrav <span id="pozdrav"></span></a></li>
+                        <!-- <li>
+                            <div class="navbar-brand" style="display:flex" onclick="prosiri()">
+                                <p>Uradi kviz<span class="fa fa-angle-double-down" id="spanKviz"></span></p>
+                            </div>
+                            <ul style="list-style:none;display:none;" id="kviz">
+                                <li><a class="navbar-brand" href="./app.html?id=1">Laksi zadatak</a></li>
+                                <li><a class="navbar-brand" href="./app.html?id=2">Tezi zadatak</a></li>
+                            </ul>
+                        </li> -->
+                        <!-- <li><a class="navbar-brand" href="./app.html?id=1">Uradi laksi zadatak</a></li>
+                        <li><a class="navbar-brand" href="./app.html?id=2">Aplikacija</a></li>
+                        <div>
+                            <li><a class="navbar-brand" href="./">Pozdrav</a></li>
+                        </div> -->
+                    </div>
+                </div>
             </ul>
         </nav>
 
+        <!-- <nav class="navbar bg-warning">
+            <ul class="navBar" style="list-style:none">
+                <div>
+                <li><a class="navbar-brand" href="./">Uputstvo</a></li>
+                <li><a class="navbar-brand" href="./app.html" id="aplikacija">Aplikacija</a></li>
+                </div>
+                <div class="marginRight">
+                <li><a class="navbar-brand" href="./">Uputstvo</a></li>
+                <li><a class="navbar-brand" href="./app.html" id="aplikacija">Aplikacija</a></li>
+            </div>
+            </ul>
+        </nav> -->
+
         <div class="overlay" id="overlay" hidden>
             <div class="confirm-box">
-              <div id="btnClose" class="close">&#10006;</div>
-              <h3>Da li zelite da uradite nase zadatke?</h3>
+              <!-- <div id="btnClose" class="close">&#10006;</div> -->
+              <h3>Da li želite da uradite naše zadatke i na taj način nam pomognete u istraživanju?</h3>
               <br/>
               <div>
                 <button id="btnPrvi" class="btn btn-primary">Zelim da uradim laksi zadatak</button>
@@ -68,10 +112,16 @@
         </div>
 
         <div class="con">
+            <div id="tekstZadatak" style="display:none">
+                Sastavite model pitanja za zadatak predstavljen tabelom ispod.<br>
+                Molimo Vas, da nakon urađenog zadatka, pošaljete sastavljen model pitanja klikom na dugme: 
+                <strong>"Pošalji odgovor"</strong> kako biste pomogli našem istraživanju.
+            </div>
+            <div id="div-zadatak" style="display:none">
+            </div>
+        <br>
         <button id='sacuvajModelPitanja' class="btn btn-primary">Sacuvaj model pitanja</button>
         <button id='ucitajModelPitanja' class="btn btn-primary">Ucitaj model pitanja</button>
-        <div id="div-zadatak" style="display:none">
-        </div>
         <div id='container' class='form-inline'>
             <div>
                 <label>Sablon pitanja</label><i class='fa fa-info-circle' id="otvoriHelperSablonPitanja"></i><br/>
@@ -172,6 +222,19 @@
         <script src="https://code.jquery.com/jquery-2.x-git.min.js"></script>
         <script src="./dist/js/query-builder.standalone.js"></script>    
         <script type='module' src='src.js'></script>
+        <script>
+            function prosiri() {
+                const kviz = document.getElementById('kviz')
+                const spanKviz = document.getElementById('spanKviz')
+                if (kviz.style.display === 'block') {
+                    kviz.style.display = 'none'
+                    spanKviz.className = 'fa fa-angle-double-down'
+                } else {
+                    kviz.style.display = 'block'
+                    spanKviz.className = 'fa fa-angle-double-up'
+                }
+            }
+        </script>
         <!-- <script>
             jedino ovako
             document.getElementById('pr').innerHTML = "<input value='nesto' data-hj-allow/>"

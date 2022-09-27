@@ -1,5 +1,5 @@
 export const zadaci = [
-    `Sastaviti model pitanja za sledeći zadatak: <br/>
+    `
     <table>
         <tr>
             <th>Pitanje</th>
@@ -23,7 +23,7 @@ export const zadaci = [
         </tr>
     </table>
     `,
-    `Sastaviti model pitanja za sledeći zadatak: <br/>
+    `
     <table>
         <tr>
             <th>Pitanje</th>

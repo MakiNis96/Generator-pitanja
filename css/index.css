@@ -110,13 +110,13 @@ html{
     background-color: teal;
 }
 .em5 {
-    background-color: red;
+    background-color: lightskyblue;
 }
 .em6 {
     background-color: orange;
 }
 .em7 {
-    background-color: lightskyblue;
+    background-color: pink;
 }
 .em8 {
     background-color: fuchsia;
@@ -134,12 +134,17 @@ i {
     background-color: rgb(230,230,230);
     border-radius: 10px;
 }
+.helperSadrzaj {
+    display: flex;
+}
+.helperText {
+    padding-left: 4%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .btnZatvori {
     height: 30px;
-}
-
-.navBar {
-    display: flex;
 }
 
 table, tr, td, th {
