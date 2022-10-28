@@ -23,6 +23,31 @@ export const zadaci = [
         </tr>
     </table>
     `,
+    ` <table>
+        <tr>
+            <th>Pitanje</th>
+            <th>Tacan odgovor</th>
+        </tr>
+        <tr>
+            <td>Koliki je zbir brojeva 50 i 10 ?</td>
+            <td>60</td>
+        </tr>
+        <tr>
+            <td>Kolika je razlika brojeva 50 i 10 ?</td>
+            <td>40</td>
+        </tr>
+        <tr>
+            <td>Koliki je proizvod brojeva 50 i 10 ?</td>
+            <td>500</td>
+        </tr>
+    </table>
+    U sve tri instance pitanja ponudjeni odgovori treba da budu:
+    <ul>
+        <li>60 <i style='color:red;font-size:14px'>(dobija se kao 50 + 10)</i></li>
+        <li>40 <i style='color:red;font-size:14px'>(dobija se kao 50 - 10)</i></li>
+        <li>500 <i style='color:red;font-size:14px'>(dobija se kao 50 * 10)</i></li>
+    </ul>
+    Po ovom uzoru treba generisati sve kombinacije pitanja kada je prvi broj 50 i 60 a drugi broj 10, 20 i 30.`,
     `
     <table>
         <tr>

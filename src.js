@@ -1,7 +1,7 @@
 import { generisiPitanja, parseQuery } from './generator.js'
 import { podaci } from './podaci.js'
 import { CrtanjeHTMLElemenata } from './basic.js'
-import { posaljiOdgovor, izdvojUsername, alertKviz, timeout } from './endpoints.js'
+import { posaljiOdgovor, izdvojUsername, alertKviz, timeout, vratiVreme, upisiVreme, azurirajVreme } from './endpoints.js'
 import { zadaci } from './zadaci.js'
 
 const contextMenu = document.getElementById('menu')
@@ -320,7 +320,6 @@ function dodajSablonOdgovora(id, sablon) {
     sablonOdgovora.onkeydown = event => spreciKeyDown(sablonOdgovora, event)
 
     sablonOdgovora.addEventListener('click', (e) => {
-        console.log(e)
         if (e.target.localName !== 'em') {
             return
         }
@@ -443,7 +442,6 @@ function oznaciParametar(div, event) { // ovo se poziva i za sablon pitanja i za
         const vrednostParametra = event.target.innerHTML
         const className = event.target.className
         const idTekucegParametra = Number(className.slice(2))
-        console.log(event)
 
         const postojiReferenca = postojiReferencaParametra(idTekucegParametra)
         if (postojiReferenca) {
@@ -500,7 +498,12 @@ function oznaciParametar(div, event) { // ovo se poziva i za sablon pitanja i za
     }
     if (selection.startOffset == selection.endOffset && Object.is(selection.startContainer, selection.endContainer)) {
         // ubacivanje postojeceg parametra
-        const startIndex = getIndexFromSelection(selection.startOffset, selection.startContainer.previousSibling, selection.startContainer.parentElement)
+        let startIndex = 0
+        if (selection.startContainer.children) {
+            startIndex = selection.startContainer.outerHTML.length// - 1
+        } else {
+            startIndex = getIndexFromSelection(selection.startOffset, selection.startContainer.previousSibling, selection.startContainer.parentElement)
+        }
 
         for (const parametar of podaci.parametriPitanja) {
             if (parametar.pitanje) {
@@ -907,7 +910,6 @@ function zapamtiPojedinacneVrednosti (idParametra) {
 const builder = document.getElementById('builder')
 
 function prikazivanjeMenija(idParametra, idSablona) { // idSablona samo ako se radi o sablonima odgovora
-    console.log(podaci)
     const parametar = podaci.parametriPitanja.find(param => param.id == idParametra)
     contextMenu.style.display = 'block'
     contextMenu.innerHTML = ''
@@ -1166,7 +1168,6 @@ function zapamtiKriterijumTacnosti() {
         : {}
     // query da pamtim u podatke, a njega da transformisem u parsedQuery u generator.js
     // const parsedQuery = parseQuery(query)
-    // console.log(parsedQuery)
     if (ktIndex > -1) {
         if (optionPodUslovom.checked && query.rules.length == 0) { // brisanje
             alert('Niste ispravno uneli uslove!')
@@ -1394,19 +1395,8 @@ e.preventDefault();
     document.execCommand("insertHTML", false, text);
 });
 
-const urlSearchParams = window.location.search
-const params = new URLSearchParams(urlSearchParams)
-const id = Number(params.get('id'))
-
 const divZadatak = document.getElementById('div-zadatak')
 const btnPosalji = document.getElementById('posaljiOdgovor')
-btnPosalji.style.display = id ? 'block' : 'none'
-if (id) {
-    divZadatak.style.display = 'block'
-    divZadatak.innerHTML = zadaci[id-1]
-} else {
-    divZadatak.style.display = 'none'
-}
 
 btnPosalji.addEventListener('click', async function () {
     zapamtiSablone()
@@ -1426,9 +1416,6 @@ btnPosalji.addEventListener('click', async function () {
 })
 
 const uradiKviz = document.getElementById('uradiKviz')
-if (id) {
-    uradiKviz.style.display = 'block'
-}
 // let podsetnik = true
 async function otvaranjeZadatka() {
     // if (podsetnik) {
@@ -1438,11 +1425,23 @@ async function otvaranjeZadatka() {
     // }
 }
 
-let username
+let username, id, prethodnoVreme, stranica 
 window.addEventListener('load', async function () {
+    const urlSearchParams = window.location.search
+    const params = new URLSearchParams(urlSearchParams)
+    id = Number(params.get('id'))
+    btnPosalji.style.display = id ? 'block' : 'none'
+    if (id) {
+        divZadatak.style.display = 'block'
+        divZadatak.innerHTML = zadaci[id-1]
+        uradiKviz.style.display = 'block'
+    } else {
+        divZadatak.style.display = 'none'
+    }
     username = izdvojUsername()
     document.getElementById('pozdrav').innerHTML = username
-    hj('tagRecording', [username])
+    stranica = `zadatak-${id || 0}`
+    prethodnoVreme = await vratiVreme(username, stranica)
 })
 
 if (!id) {
@@ -1497,6 +1496,20 @@ if (id) {
     document.getElementById('tekstZadatak').style.display = 'block'
 }
 
+TimeMe.initialize({
+    currentPageName: "home-page", // page name
+    idleTimeoutInSeconds: 10 // stop recording time due to inactivity
+});
+window.onbeforeunload = async function () {
+    const time = Math.round(TimeMe.getTimeOnCurrentPageInSeconds())
+    if (prethodnoVreme.length === 0) {
+        await upisiVreme(username, stranica, time)
+    } else {
+        const novoVreme = prethodnoVreme[0].vreme + time
+        await azurirajVreme(prethodnoVreme[0].id, username, stranica, novoVreme)
+    }
+}
+
 // const primerModelaPitanja = document.getElementById('primerModelaPitanja')
 // document.getElementById('otvoriPrimerModelaPitanja').addEventListener('click', function () {
 //     primerModelaPitanja.style.display = 'flex'
@@ -1532,5 +1545,3 @@ if (id) {
 // bug - promeni defaultnu - ne radi savrseno, bitno da ne baca greske
 // 3.
 // 4.
-
-// ok - delovi za evaluaciju u sablonu odgovora - implementirano, treba opis toga

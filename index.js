@@ -1,13 +1,17 @@
-import { alertKviz, izdvojUsername, pribaviOdgovore, timeout } from './endpoints.js'
+import { alertKviz, izdvojUsername, vratiVreme, upisiVreme, azurirajVreme, timeout } from './endpoints.js'
 
-let username// , podsetnik = true
+export let username
+let prethodnoVreme
+const stranica = 'uputstvo' 
 
 window.addEventListener('load', async function () {
     username = izdvojUsername()
     document.getElementById('aplikacija').href = `./app.html?username=${username}`
     document.getElementById('slobodnoKoriscenje').href = `./app.html?username=${username}`
     document.getElementById('pozdrav').innerHTML = username
-    hj('tagRecording', [username])
+    // hj('tagRecording', [username])
+
+    prethodnoVreme = await vratiVreme(username, stranica)
 
     setTimeout(otvaranjeZadatka, timeout)
 })
@@ -52,13 +56,27 @@ document.getElementById('btnNe').addEventListener('click', () => {
     closeConfirmBox()
 })
 
+TimeMe.initialize({
+    currentPageName: "home-page", // page name
+    idleTimeoutInSeconds: 10 // stop recording time due to inactivity
+});
+window.onbeforeunload = async function () {
+    const time = Math.round(TimeMe.getTimeOnCurrentPageInSeconds())
+    if (prethodnoVreme.length === 0) {
+        await upisiVreme(username, stranica, time)
+    } else {
+        const novoVreme = prethodnoVreme[0].vreme + time
+        await azurirajVreme(prethodnoVreme[0].id, username, stranica, novoVreme)
+    }
+}
+
 // za postavljanje
 // http-server i json-server
-// pokretanje http-servera: http-server -S -C cert.pem -o -c-1
-// pokretanje json-servera: npm start (pre toga npm install)
-// mora da se podese urlovi u hotjar i da se ubaci tracking code na stranicama
+// pokretanje http-servera: http-server -c-1
+// pokretanje json-servera: json-server --watch db.json
 // mora da se promeni backPort i backHost u config fajlu
-// otvaranje zadatka na 1min 
+// otvaranje zadatka na 1min
 
-// interfejs promene:
-// da mu kazem da je gore link uvek nakon pojave dijaloga podseti, ne podsecaj i to
+// db.json
+// odgovori - {zadatakId (1 ili 2), username, odgovor (sve iz strukture podaci)}
+// vreme - {username, stranica ('uputstvo', 'zadatak-0', 'zadatak-1', 'zadatak-2'), ukupnoVreme}

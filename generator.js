@@ -4,7 +4,6 @@ import { podaci } from './podaci.js'
 const inputRezultat = document.getElementById('rezultat')
 
 export function generisiPitanja() {
-    console.log(podaci)
     // ISPRAVKA - da moze prvo parametri odgovora pa onda parametri pitanja da se oznacavaju (sada mora prvo parametri pitanja pa odgovora)
     const data = podaci.parametriPitanja.filter(parametar => parametar.pitanje === true)
                                         // .map(parametar => parametar.vrednosti)
@@ -14,7 +13,7 @@ export function generisiPitanja() {
         return
     }
     const izlaz = permutiranje.permutiraj(data)
-    console.log(izlaz) // niz nizova, jedan element je objekat koji sadrzi objekat vrednost i idParametra
+    // niz nizova, jedan element je objekat koji sadrzi objekat vrednost i idParametra
 
     for (const komb of izlaz) {
         let mogucaKombinacija = true // true
@@ -53,7 +52,6 @@ export function generisiPitanja() {
             mogucaKombinacija = mogucaKombinacija && mk
         }
         if (mogucaKombinacija) {
-            console.log(stvarniParametriZaParsiranje)
             parsiranje(stvarniParametriZaParsiranje)
             generisanjeOdgovora(stvarniParametriZaParsiranje)
         }

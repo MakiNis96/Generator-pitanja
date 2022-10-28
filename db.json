@@ -1,4 +1,35 @@
 {
-  "odgovori": [
+  "odgovori": [],
+  "vreme": [
+    {
+      "id": 1,
+      "username": "mirko",
+      "stranica": "uputstvo",
+      "vreme": 147
+    },
+    {
+      "id": 2,
+      "username": "mladen",
+      "stranica": "uputstvo",
+      "vreme": 189
+    },
+    {
+      "id": 3,
+      "username": "mladen",
+      "stranica": "zadatak-0",
+      "vreme": 44
+    },
+    {
+      "id": 4,
+      "username": "mladen",
+      "stranica": "zadatak-1",
+      "vreme": 31
+    },
+    {
+      "username": "mladen",
+      "stranica": "zadatak-2",
+      "vreme": 12,
+      "id": 5
+    }
   ]
 }

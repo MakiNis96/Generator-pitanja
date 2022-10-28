@@ -1,6 +1,7 @@
 import { config } from "./config.js"
 
-const backUrl = `https://${config.backHost}:${config.backPort}`
+// const backUrl = `https://${config.backHost}:${config.backPort}`
+const backUrl = `http://${config.backHost}:${config.backPort}`
 
 async function posaljiOdgovor(odgovor) {
     await fetch(`${backUrl}/odgovori`, {
@@ -12,10 +13,39 @@ async function posaljiOdgovor(odgovor) {
     })
 }
 
-async function pribaviOdgovore(username) {
-    const response = await fetch(`${backUrl}/odgovori?username=${username}`, {method: 'GET'})
-    const odgovori = await response.json()
-    return odgovori
+async function vratiVreme(username, stranica) {
+    const response = await fetch(`${backUrl}/vreme?username=${username}&stranica=${stranica}`, {
+        method: 'GET'
+    })
+    const vreme = await response.json()
+    return vreme
+}
+async function upisiVreme(username, stranica, novoVreme) {
+    await fetch(`${backUrl}/vreme`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            username,
+            stranica,
+            vreme: novoVreme
+        })
+    })
+}
+async function azurirajVreme(id, username, stranica, novoVreme) {
+    await fetch(`${backUrl}/vreme/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            id,
+            username,
+            stranica,
+            vreme: novoVreme
+        })
+    })
 }
 
 function izdvojUsername() {
@@ -35,4 +65,4 @@ function alertKviz() {
 
 const timeout = 60 * 1000
 
-export { posaljiOdgovor, pribaviOdgovore, izdvojUsername, alertKviz, timeout }   
+export { posaljiOdgovor, /*pribaviOdgovore,*/ izdvojUsername, alertKviz, upisiVreme, vratiVreme, azurirajVreme, timeout }   
