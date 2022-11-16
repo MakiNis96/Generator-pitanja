@@ -915,10 +915,13 @@ function prikazivanjeMenija(idParametra, idSablona) { // idSablona samo ako se r
     contextMenu.innerHTML = ''
     for (const vrednost of parametar.vrednosti) {
         const li = CrtanjeHTMLElemenata.nacrtajElement(contextMenu, 'li', ['menu-item'])
+        li.style.width = '90%'
+        li.style.height = '100%'
+        li.style.display = 'flex'
         const radioInput = CrtanjeHTMLElemenata.nacrtajRadioInput(li, 'defaultAlternativa', '', vrednost.id)
         radioInput.checked = vrednost.default
-        const lblVrednost = CrtanjeHTMLElemenata.nacrtajElement(li, 'label', [], vrednost.vrednost)
-        lblVrednost.style.fontWeight = 'normal'
+        const divVrednost = CrtanjeHTMLElemenata.nacrtajElement(li, 'div', [], vrednost.vrednost)
+        divVrednost.style.overflowX = 'auto'
 
         const btnPovezi = CrtanjeHTMLElemenata.nacrtajElement(li, 'label', ['btn', 'btn-primary', 'btnPovezi'], 'Povezi', `connect${vrednost.id}`)
         btnPovezi.addEventListener('click', () => {
@@ -1437,16 +1440,13 @@ window.addEventListener('load', async function () {
         uradiKviz.style.display = 'block'
     } else {
         divZadatak.style.display = 'none'
+        setTimeout(otvaranjeZadatka, timeout)
     }
     username = izdvojUsername()
     document.getElementById('pozdrav').innerHTML = username
     stranica = `zadatak-${id || 0}`
     prethodnoVreme = await vratiVreme(username, stranica)
 })
-
-if (!id) {
-    setTimeout(otvaranjeZadatka, timeout)
-}
 
 function showConfirmBox() {
     document.getElementById("overlay").hidden = false;

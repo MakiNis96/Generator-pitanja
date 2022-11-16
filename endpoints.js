@@ -1,6 +1,5 @@
 import { config } from "./config.js"
 
-// const backUrl = `https://${config.backHost}:${config.backPort}`
 const backUrl = `http://${config.backHost}:${config.backPort}`
 
 async function posaljiOdgovor(odgovor) {
@@ -63,6 +62,6 @@ function alertKviz() {
     alert('Od sada u meniju imate i opciju "Uradi kviz" odakle možete da otvorite i probate da uradite naše zadatke.')
 }
 
-const timeout = 60 * 1000
+const timeout = 10 * 1000
 
 export { posaljiOdgovor, /*pribaviOdgovore,*/ izdvojUsername, alertKviz, upisiVreme, vratiVreme, azurirajVreme, timeout }   
