@@ -755,7 +755,7 @@ opsegZapamti.addEventListener('click', (e) => {
     const korak = Number(korakInput.value)
 
     const vrednosti = []
-    for (let v = od; v < doOpseg; v += korak) {
+    for (let v = od; v <= doOpseg; v += korak) {
         const defaultFleg = v == od ? true : false
         vrednosti.push({
             vrednost: v.toString(),
