@@ -1,7 +1,7 @@
 import { generisiPitanja, parseQuery } from './generator.js'
 import { podaci } from './podaci.js'
 import { CrtanjeHTMLElemenata } from './basic.js'
-import { posaljiOdgovor, izdvojUsername, alertKviz, timeout, vratiVreme, upisiVreme, azurirajVreme } from './endpoints.js'
+import { posaljiOdgovor, izdvojUsername, alertKviz, timeout, azurirajKorisnika, vratiKorisnika } from './endpoints.js'
 import { zadaci } from './zadaci.js'
 
 const contextMenu = document.getElementById('menu')
@@ -1403,16 +1403,28 @@ const btnPosalji = document.getElementById('posaljiOdgovor')
 
 btnPosalji.addEventListener('click', async function () {
     zapamtiSablone()
+
+    const time = Math.round(TimeMe.getTimeOnCurrentPageInSeconds())
+    const akcijeKorisnika = korisnik.akcije.filter(akcija => (akcija.stranica === stranica) && akcija.pokusaj)
+    akcijeKorisnika.sort((a, b) => b.pokusaj - a.pokusaj)
+    const pokusaj = akcijeKorisnika.length > 0 ? akcijeKorisnika[0].pokusaj + 1 : 1
     await posaljiOdgovor({
         zadatakId: id,
-        username: username,
-        // odgovor: JSON.stringify(podaci)    
-        odgovor: podaci
+        username: username,    
+        odgovor: podaci,
+        pokusaj
     })
+
+    korisnik = await azurirajKorisnika(korisnik, {
+        stranica,
+        vreme: time, 
+        pokusaj
+    })
+    // TimeMe.stopTimer()
+    TimeMe.resetRecordedPageTime(stranica);
+    // TimeMe.startTimer()
+
     alert(`${id ? 'Odgovor' : 'Model pitanja'} je uspesno poslat.`)
-    if (id == 2) {
-        window.location = './app.html'
-    }
     if (id === 1) {
         showDialog2()
     }
@@ -1428,7 +1440,7 @@ async function otvaranjeZadatka() {
     // }
 }
 
-let username, id, prethodnoVreme, stranica 
+let username, id, stranica, korisnik
 window.addEventListener('load', async function () {
     const urlSearchParams = window.location.search
     const params = new URLSearchParams(urlSearchParams)
@@ -1442,10 +1454,15 @@ window.addEventListener('load', async function () {
         divZadatak.style.display = 'none'
         setTimeout(otvaranjeZadatka, timeout)
     }
-    username = izdvojUsername()
+    korisnik = await izdvojUsername()
+    username = korisnik.username
     document.getElementById('pozdrav').innerHTML = username
     stranica = `zadatak-${id || 0}`
-    prethodnoVreme = await vratiVreme(username, stranica)
+
+    TimeMe.initialize({
+        currentPageName: stranica, // page name
+        idleTimeoutInSeconds: 10 // stop recording time due to inactivity
+    });
 })
 
 function showConfirmBox() {
@@ -1496,19 +1513,33 @@ if (id) {
     document.getElementById('tekstZadatak').style.display = 'block'
 }
 
-TimeMe.initialize({
-    currentPageName: "home-page", // page name
-    idleTimeoutInSeconds: 10 // stop recording time due to inactivity
-});
+// TimeMe.initialize({
+//     currentPageName: stranica, // page name
+//     idleTimeoutInSeconds: 10 // stop recording time due to inactivity
+// });
+
 window.onbeforeunload = async function () {
     const time = Math.round(TimeMe.getTimeOnCurrentPageInSeconds())
-    if (prethodnoVreme.length === 0) {
-        await upisiVreme(username, stranica, time)
-    } else {
-        const novoVreme = prethodnoVreme[0].vreme + time
-        await azurirajVreme(prethodnoVreme[0].id, username, stranica, novoVreme)
-    }
+    korisnik = await azurirajKorisnika(korisnik, {
+        stranica,
+        vreme: time
+    })
 }
+
+window.addEventListener('visibilitychange', async function () {
+    if (document.hidden) {
+        const time = Math.round(TimeMe.getTimeOnCurrentPageInSeconds())
+        korisnik = await azurirajKorisnika(korisnik, {
+            stranica,
+            vreme: time
+        })
+    } else {
+        TimeMe.stopTimer()
+        TimeMe.resetRecordedPageTime(stranica);
+        TimeMe.startTimer()
+        korisnik = await vratiKorisnika(username)
+    }
+})
 
 // const primerModelaPitanja = document.getElementById('primerModelaPitanja')
 // document.getElementById('otvoriPrimerModelaPitanja').addEventListener('click', function () {

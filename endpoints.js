@@ -12,42 +12,47 @@ async function posaljiOdgovor(odgovor) {
     })
 }
 
-async function vratiVreme(username, stranica) {
-    const response = await fetch(`${backUrl}/vreme?username=${username}&stranica=${stranica}`, {
+async function vratiKorisnika(username) {
+    const response = await fetch(`${backUrl}/korisnici?username=${username}`, {
         method: 'GET'
     })
-    const vreme = await response.json()
-    return vreme
+    const korisnici = await response.json()
+    return korisnici.length ? korisnici[0] : null
 }
-async function upisiVreme(username, stranica, novoVreme) {
-    await fetch(`${backUrl}/vreme`, {
+async function upisiKorisnika(username) {
+    const response = await fetch(`${backUrl}/korisnici`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
             username,
-            stranica,
-            vreme: novoVreme
+            akcije: []
         })
     })
+    const korisnik = await response.json()
+    return korisnik
 }
-async function azurirajVreme(id, username, stranica, novoVreme) {
-    await fetch(`${backUrl}/vreme/${id}`, {
+async function azurirajKorisnika(korisnik, novaAkcija) {
+    const id = korisnik ? korisnik.id : -1
+    const akcije = korisnik ? korisnik.akcije : []
+    akcije.push(novaAkcija)
+    const response = await fetch(`${backUrl}/korisnici/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
             id,
-            username,
-            stranica,
-            vreme: novoVreme
+            username: korisnik.username,
+            akcije
         })
     })
+    const azurniKorisnik = await response.json()
+    return azurniKorisnik
 }
 
-function izdvojUsername() {
+async function izdvojUsername() {
     const cookies = document.cookie.split(';')
     const cookieUsername = cookies.find(cookie => cookie.split('=')[0].includes('username'))
     let username = cookieUsername ? cookieUsername.split('=')[1] : null
@@ -55,7 +60,12 @@ function izdvojUsername() {
         username = prompt('Unesite korisnicko ime kako bismo Vas pozdravili')
         document.cookie = `username=${username}; expires=${new Date(9999, 0, 1).toUTCString()}`
     }
-    return username
+    let korisnik = await vratiKorisnika(username)
+    if (!korisnik) {
+        korisnik = await upisiKorisnika(username)
+    }
+    
+    return korisnik
 }
 
 function alertKviz() {
@@ -64,4 +74,4 @@ function alertKviz() {
 
 const timeout = 10 * 1000
 
-export { posaljiOdgovor, /*pribaviOdgovore,*/ izdvojUsername, alertKviz, upisiVreme, vratiVreme, azurirajVreme, timeout }   
+export { posaljiOdgovor, izdvojUsername, alertKviz, upisiKorisnika, vratiKorisnika, azurirajKorisnika, /*upisiVreme, vratiVreme, azurirajVreme,*/ timeout }   

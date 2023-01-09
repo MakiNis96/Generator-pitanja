@@ -1,35 +1,5 @@
 {
   "odgovori": [],
-  "vreme": [
-    {
-      "id": 1,
-      "username": "mirko",
-      "stranica": "uputstvo",
-      "vreme": 147
-    },
-    {
-      "id": 2,
-      "username": "mladen",
-      "stranica": "uputstvo",
-      "vreme": 218
-    },
-    {
-      "id": 3,
-      "username": "mladen",
-      "stranica": "zadatak-0",
-      "vreme": 50
-    },
-    {
-      "id": 4,
-      "username": "mladen",
-      "stranica": "zadatak-1",
-      "vreme": 48
-    },
-    {
-      "id": 5,
-      "username": "mladen",
-      "stranica": "zadatak-2",
-      "vreme": 20
-    }
+  "korisnici": [
   ]
 }

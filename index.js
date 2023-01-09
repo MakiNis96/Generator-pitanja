@@ -1,17 +1,20 @@
-import { alertKviz, izdvojUsername, vratiVreme, upisiVreme, azurirajVreme, timeout } from './endpoints.js'
+import { alertKviz, azurirajKorisnika, izdvojUsername, vratiKorisnika, timeout } from './endpoints.js'
+import { config } from "./config.js"
+
+const backUrl = `http://${config.backHost}:${config.backPort}`
 
 export let username
-let prethodnoVreme
-const stranica = 'uputstvo' 
+const stranica = 'uputstvo'
+let korisnik
 
 window.addEventListener('load', async function () {
-    username = izdvojUsername()
+    korisnik = await izdvojUsername()
+    username = korisnik.username
     document.getElementById('aplikacija').href = `./app.html?username=${username}`
     document.getElementById('slobodnoKoriscenje').href = `./app.html?username=${username}`
     document.getElementById('pozdrav').innerHTML = username
-    // hj('tagRecording', [username])
 
-    prethodnoVreme = await vratiVreme(username, stranica)
+    // korisnik = await vratiKorisnika(username)
 
     setTimeout(otvaranjeZadatka, timeout)
 })
@@ -57,18 +60,36 @@ document.getElementById('btnNe').addEventListener('click', () => {
 })
 
 TimeMe.initialize({
-    currentPageName: "home-page", // page name
-    idleTimeoutInSeconds: 10 // stop recording time due to inactivity
+    currentPageName: stranica, // page name
+    idleTimeoutInSeconds: 10, // stop recording time due to inactivity
 });
 window.onbeforeunload = async function () {
     const time = Math.round(TimeMe.getTimeOnCurrentPageInSeconds())
-    if (prethodnoVreme.length === 0) {
-        await upisiVreme(username, stranica, time)
-    } else {
-        const novoVreme = prethodnoVreme[0].vreme + time
-        await azurirajVreme(prethodnoVreme[0].id, username, stranica, novoVreme)
-    }
+    // const korisnik = await vratiKorisnika(username)
+    korisnik = await azurirajKorisnika(korisnik, {
+        stranica,
+        vreme: time
+    })
 }
+
+window.addEventListener('visibilitychange', async function () {
+    // console.log(window.performance.navigation)
+    // if (document.visibilityState != 'visible') {
+    if (document.hidden) {
+        const time = Math.round(TimeMe.getTimeOnCurrentPageInSeconds())
+        // const korisnik = await vratiKorisnika(username)
+        // const id = korisnik ? korisnik.id : -1
+        korisnik = await azurirajKorisnika(korisnik, {
+            stranica,
+            vreme: time
+        })
+    } else {
+        TimeMe.stopTimer()
+        TimeMe.resetRecordedPageTime(stranica);
+        TimeMe.startTimer()
+        korisnik = await vratiKorisnika(username)
+    }
+})
 
 // db.json
 // odgovori - {zadatakId (1 ili 2), username, odgovor (sve iz strukture podaci)}
