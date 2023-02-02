@@ -1,8 +1,6 @@
 import { alertKviz, azurirajKorisnika, izdvojUsername, vratiKorisnika, timeout } from './endpoints.js'
 import { config } from "./config.js"
 
-const backUrl = `http://${config.backHost}:${config.backPort}`
-
 export let username
 const stranica = 'uputstvo'
 let korisnik

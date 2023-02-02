@@ -1,5 +1,6 @@
 import jsonServer from 'json-server';
-import http from 'http';
+import https from 'https';
+import fs from 'fs';
 import { config } from "./config.js"
 const { backHost, backPort } = config
 
@@ -11,12 +12,16 @@ server.use(middlewares);
 server.use(jsonServer.bodyParser)
 server.use(router)
 
-http
+https
   .createServer(
+    {
+      key: fs.readFileSync('key.pem'),
+      cert: fs.readFileSync('cert.pem'),
+    },
     server
   )
   .listen(backPort, backHost, () => {
     console.log(
-      `Server started at http://${backHost}:${backPort}/`
+      `Server started at https://${backHost}:${backPort}/`
     );
   });
