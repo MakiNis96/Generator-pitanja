@@ -1,19 +1,6 @@
 {
-  "odgovori": [
-    {
-      "id": 1
-    },
-    {
-      "id": 2
-    }
+  "korisnici": [ 
   ],
-  "korisnici": [
-    {
-      "id": 1,
-      "username": "mladen"
-    },
-    {
-      "id": 2
-    }
+  "odgovori": [ 
   ]
 }
