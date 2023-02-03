@@ -1,5 +1,19 @@
 {
-  "odgovori": [],
+  "odgovori": [
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    }
+  ],
   "korisnici": [
+    {
+      "id": 1,
+      "username": "mladen"
+    },
+    {
+      "id": 2
+    }
   ]
 }
