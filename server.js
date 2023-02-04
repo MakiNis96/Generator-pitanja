@@ -12,10 +12,10 @@ server.use(middlewares);
 server.use(jsonServer.bodyParser)
 
 server.get('/korisnici', (req, res, next) => {
-  if (!Object.keys(req.query).length) {
-    return res.status(403).send()
+  if (req.query.username) {
+    return next()
   }
-  next()
+  res.status(403).send()
 })
 server.get('/odgovori', (req, res) => {
   res.status(403).send()
