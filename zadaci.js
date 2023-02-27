@@ -29,15 +29,15 @@ export const zadaci = [
             <th>Tacan odgovor</th>
         </tr>
         <tr>
-            <td>Koliki je zbir brojeva 50 i 10 ?</td>
+            <td>Koliko iznosi zbir brojeva 50 i 10 ?</td>
             <td>60</td>
         </tr>
         <tr>
-            <td>Kolika je razlika brojeva 50 i 10 ?</td>
+            <td>Koliko iznosi razlika brojeva 50 i 10 ?</td>
             <td>40</td>
         </tr>
         <tr>
-            <td>Koliki je proizvod brojeva 50 i 10 ?</td>
+            <td>Koliko iznosi proizvod brojeva 50 i 10 ?</td>
             <td>500</td>
         </tr>
     </table>
