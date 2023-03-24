@@ -375,6 +375,7 @@ document.getElementById('btnGenerisi').addEventListener('click', () => {
     document.getElementById('rezultat').innerHTML = ''
     zapamtiSablone()
     generisiPitanja()
+    document.getElementById('podsetikZaSlanje').style.display = 'block'
 })
 function zapamtiSablone () {
     podaci.sablonPitanja = ''
@@ -1428,6 +1429,7 @@ btnPosalji.addEventListener('click', async function () {
     if (id === 1) {
         showDialog2()
     }
+    document.getElementById('podsetikZaSlanje').style.display = 'none'
 })
 
 const uradiKviz = document.getElementById('uradiKviz')
@@ -1454,7 +1456,12 @@ window.addEventListener('load', async function () {
         divZadatak.style.display = 'none'
         setTimeout(otvaranjeZadatka, timeout)
     }
-    korisnik = await izdvojUsername()
+    try {
+        korisnik = await izdvojUsername()
+    } catch(error) {
+        document.getElementById('serverStop').style.display = 'block'
+    }
+
     username = korisnik.username
     document.getElementById('pozdrav').innerHTML = username
     stranica = `zadatak-${id || 0}`

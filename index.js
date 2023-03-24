@@ -1,18 +1,19 @@
 import { alertKviz, azurirajKorisnika, izdvojUsername, vratiKorisnika, timeout } from './endpoints.js'
-import { config } from "./config.js"
 
 export let username
 const stranica = 'uputstvo'
 let korisnik
 
 window.addEventListener('load', async function () {
-    korisnik = await izdvojUsername()
+    try {
+        korisnik = await izdvojUsername()
+    } catch(error) {
+        document.getElementById('serverStop').style.display = 'block'
+    }
     username = korisnik.username
     document.getElementById('aplikacija').href = `./app.html?username=${username}`
     document.getElementById('slobodnoKoriscenje').href = `./app.html?username=${username}`
     document.getElementById('pozdrav').innerHTML = username
-
-    // korisnik = await vratiKorisnika(username)
 
     setTimeout(otvaranjeZadatka, timeout)
 })
@@ -20,11 +21,9 @@ window.addEventListener('load', async function () {
 const uradiKviz = document.getElementById('uradiKviz')
 
 async function otvaranjeZadatka() {
-    // if (podsetnik) {
-        closeConfirmBox()
-        showConfirmBox()
-        uradiKviz.style.display = 'block'
-    // }
+    closeConfirmBox()
+    showConfirmBox()
+    uradiKviz.style.display = 'block'
 }
 
 function showConfirmBox() {
@@ -58,12 +57,11 @@ document.getElementById('btnNe').addEventListener('click', () => {
 })
 
 TimeMe.initialize({
-    currentPageName: stranica, // page name
-    idleTimeoutInSeconds: 10, // stop recording time due to inactivity
+    currentPageName: stranica,
+    idleTimeoutInSeconds: 10,
 });
 window.onbeforeunload = async function () {
     const time = Math.round(TimeMe.getTimeOnCurrentPageInSeconds())
-    // const korisnik = await vratiKorisnika(username)
     korisnik = await azurirajKorisnika(korisnik, {
         stranica,
         vreme: time
@@ -71,12 +69,8 @@ window.onbeforeunload = async function () {
 }
 
 window.addEventListener('visibilitychange', async function () {
-    // console.log(window.performance.navigation)
-    // if (document.visibilityState != 'visible') {
     if (document.hidden) {
         const time = Math.round(TimeMe.getTimeOnCurrentPageInSeconds())
-        // const korisnik = await vratiKorisnika(username)
-        // const id = korisnik ? korisnik.id : -1
         korisnik = await azurirajKorisnika(korisnik, {
             stranica,
             vreme: time

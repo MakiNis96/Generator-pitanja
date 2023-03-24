@@ -60,18 +60,7 @@
             </ul>
         </nav>
 
-        <!-- <nav class="navbar bg-warning">
-            <ul class="navBar" style="list-style:none">
-                <div>
-                <li><a class="navbar-brand" href="./">Uputstvo</a></li>
-                <li><a class="navbar-brand" href="./app.html" id="aplikacija">Aplikacija</a></li>
-                </div>
-                <div class="marginRight">
-                <li><a class="navbar-brand" href="./">Uputstvo</a></li>
-                <li><a class="navbar-brand" href="./app.html" id="aplikacija">Aplikacija</a></li>
-            </div>
-            </ul>
-        </nav> -->
+        <div style="color:red; display: none;" id="serverStop">Server je stopiran, nisu dostupne sve funkcionalnosti aplikacije!</div>
 
         <div class="overlay" id="overlay" hidden>
             <div class="confirm-box">
@@ -153,9 +142,12 @@
                     Broj ponudjenjih odgovora <input type='number' min='1' id='brojPonudjenih' style='width:80px' class='form-control data-hj-allow'/>
                 </div>
             </div>
-            <button id='btnGenerisi' class="btn btn-primary">Generisi pitanja</button> <br/> <br/>
+            <button id='btnGenerisi' class="btn btn-primary">Generisi pitanja</button>
+            <br/> <br/>
             <button id='btnObrisiModel' class="btn btn-danger">Obrisi model pitanja</button> <br/> <br/>
-            <button  class="btn btn-primary" id="posaljiOdgovor">Posalji odgovor</button> <br/>
+            <button  class="btn btn-primary" id="posaljiOdgovor">Posalji odgovor</button>
+            <p style="color:red;display: none;" id="podsetikZaSlanje">Ne zaboravite da posaljete odgovor</p>
+            <br/>
             <!-- <label>Rezultat: </label><textarea rows='20' cols='50' id='rezultat' class='form-control' data-hj-allow></textarea> <br/> -->
             <label>Rezultat: </label><div id='rezultat'></div> <br/>    
             </div>
