@@ -7,15 +7,16 @@ let korisnik
 window.addEventListener('load', async function () {
     try {
         korisnik = await izdvojUsername()
+        username = korisnik.username
+        document.getElementById('aplikacija').href = `./app.html?username=${username}`
+        document.getElementById('slobodnoKoriscenje').href = `./app.html?username=${username}`
+        document.getElementById('pozdrav').innerHTML = username
+
+        setTimeout(otvaranjeZadatka, timeout)
     } catch(error) {
+        uradiKviz.style.display = 'none'
         document.getElementById('serverStop').style.display = 'block'
     }
-    username = korisnik.username
-    document.getElementById('aplikacija').href = `./app.html?username=${username}`
-    document.getElementById('slobodnoKoriscenje').href = `./app.html?username=${username}`
-    document.getElementById('pozdrav').innerHTML = username
-
-    setTimeout(otvaranjeZadatka, timeout)
 })
 
 const uradiKviz = document.getElementById('uradiKviz')

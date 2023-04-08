@@ -52,21 +52,17 @@ async function azurirajKorisnika(korisnik, novaAkcija) {
     return azurniKorisnik
 }
 
+const uradiKviz = document.getElementById('uradiKviz')
 async function izdvojUsername() {
     const cookies = document.cookie.split(';')
     const cookieUsername = cookies.find(cookie => cookie.split('=')[0].includes('username'))
     let username = cookieUsername ? cookieUsername.split('=')[1] : null
-    let zauzeto = false
+    if (username) {
+        uradiKviz.style.display = 'block'
+    }
     while(!username) {
-        const poruka = zauzeto ? 'Uneto korisnicko ime je zauzeto. Unesite drugo korisnicko ime.' : 'Unesite korisnicko ime kako bismo Vas pozdravili'
-        username = prompt(poruka)
-        if (await vratiKorisnika(username)) {
-            username = ''
-            zauzeto = true
-        } else {
-            document.cookie = `username=${username}; expires=${new Date(9999, 0, 1).toUTCString()}`
-            zauzeto = false
-        }
+        username = prompt('Unesite korisnicko ime kako bismo Vas pozdravili')
+        document.cookie = `username=${username}; expires=${new Date(9999, 0, 1).toUTCString()}`
     }
     let korisnik = await vratiKorisnika(username)
     if (!korisnik) {
@@ -80,6 +76,6 @@ function alertKviz() {
     alert('Od sada u meniju imate i opciju "Uradi kviz" odakle možete da otvorite i probate da uradite naše zadatke.')
 }
 
-const timeout = 10 * 1000
+const timeout = 10 * 60 * 1000
 
-export { posaljiOdgovor, izdvojUsername, alertKviz, upisiKorisnika, vratiKorisnika, azurirajKorisnika, /*upisiVreme, vratiVreme, azurirajVreme,*/ timeout }   
+export { posaljiOdgovor, izdvojUsername, alertKviz, upisiKorisnika, vratiKorisnika, azurirajKorisnika, timeout }   

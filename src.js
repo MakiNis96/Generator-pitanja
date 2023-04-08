@@ -1433,13 +1433,10 @@ btnPosalji.addEventListener('click', async function () {
 })
 
 const uradiKviz = document.getElementById('uradiKviz')
-// let podsetnik = true
 async function otvaranjeZadatka() {
-    // if (podsetnik) {
-        closeConfirmBox()
-        showConfirmBox()
-        uradiKviz.style.display = 'block'
-    // }
+    closeConfirmBox()
+    showConfirmBox()
+    uradiKviz.style.display = 'block'
 }
 
 let username, id, stranica, korisnik
@@ -1459,7 +1456,7 @@ window.addEventListener('load', async function () {
     try {
         korisnik = await izdvojUsername()
     } catch(error) {
-        document.getElementById('serverStop').style.display = 'block'
+        window.open('/', '_self')
     }
 
     username = korisnik.username
