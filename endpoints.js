@@ -1,6 +1,6 @@
 import { config } from "./config.js"
 
-const backUrl = `https://${config.backHost}:${config.backPort}`
+const { backUrl } = config
 
 async function posaljiOdgovor(odgovor) {
     await fetch(`${backUrl}/odgovori`, {

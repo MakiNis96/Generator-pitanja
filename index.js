@@ -83,11 +83,3 @@ window.addEventListener('visibilitychange', async function () {
         korisnik = await vratiKorisnika(username)
     }
 })
-
-// db.json
-// odgovori - {zadatakId (1 ili 2), username, odgovor (sve iz strukture podaci)}
-// vreme - {username, stranica ('uputstvo', 'zadatak-0', 'zadatak-1', 'zadatak-2'), ukupnoVreme}
-
-// pokretanje:
-// http-server -c-1 i npm start (u pozaditi pokrece: json-server --watch db.json)
-// mora da se postavi backPort i backHost (za json-server) u config fajlu
