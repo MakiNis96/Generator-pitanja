@@ -1556,31 +1556,3 @@ window.onbeforeunload = async function () {
 // document.getElementById('zatvoriPrimerModelaPitanja').addEventListener('click', function () {
 //     primerModelaPitanja.style.display = 'none'
 // })
-
-// brisanje parametra - ako ucestuvuje u kt ne bi trebalo da moze da se obrise
-// takodje i brisanje vrednosti - uradjeno
-// brisanje sablona odgovora - ok
-// nakon brisanja parametra, ne radi Povezi - ok
-// Missing filters - ok
-// ok - kod kloniranja da postavim uslove: u sablonu odg samo jedan param odgovora (parametri odgovora da ne mogu da se kloniraju)
-// ok - u odg parametar pitanja - ne radi
-// onk - ako korisnik oznaci slova, da ne moze opseg brojeva da postavi
-// ok - jedan parametar odgovora u jednom sablonu odgovora - ogranicenje
-// prikazivanje kada je odgovor tacan, ako imam parametre pitanja - treba se razmisli
-// deo za evaluaciju bolje da oznacim, sada su italic i veca slova
-// ok - sredjivanje defaultne alternative
-// ok - Zapamti kod postavljanja alternativa, vise puta se prikazuje Sacuvano
-// ok - sredjivanje koda sa interfejsom (ubacivanje fja iz basic)
-// ok - brisanje kloniranog parametra (ako imam dva ista u redu brise se uvek prvi, a treba koji je izabran)
-// ok - sredjivanje interfejsa - bootstrap
-// ok - boje za opcije selekta
-// ok - ako je izabrano zatvorenog tipa, a nije unet broj ponudjenih odgovora, onda sve moguce ponudjene da prikazem
-// ok - Ako se sacuva prazan kriterijum tacnosti - odgovor je uvek tacan!! - za uvek tacan uslov u kt je {}
-// (da ima opcija uvek tacan da se izabere - tad da se upise {} u uslov, a kad se unese neispravan kt da se uopste ne upisuje u podaci)
-// isprobavanje realnih primera
-// primeri iz sir1
-// ok - 1.
-// ok - 2. (nije moguce kloniranje parametra odgovora) 
-// bug - promeni defaultnu - ne radi savrseno, bitno da ne baca greske
-// 3.
-// 4.
