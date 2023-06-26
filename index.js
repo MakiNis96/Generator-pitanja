@@ -61,25 +61,29 @@ TimeMe.initialize({
     currentPageName: stranica,
     idleTimeoutInSeconds: 10,
 });
+const start = (new Date()).getTime()
+
 window.onbeforeunload = async function () {
     const time = Math.round(TimeMe.getTimeOnCurrentPageInSeconds())
     korisnik = await azurirajKorisnika(korisnik, {
         stranica,
-        vreme: time
+        vreme: time,
+        start: start,
+        end: (new Date()).getTime()
     })
 }
 
-window.addEventListener('visibilitychange', async function () {
-    if (document.hidden) {
-        const time = Math.round(TimeMe.getTimeOnCurrentPageInSeconds())
-        korisnik = await azurirajKorisnika(korisnik, {
-            stranica,
-            vreme: time
-        })
-    } else {
-        TimeMe.stopTimer()
-        TimeMe.resetRecordedPageTime(stranica);
-        TimeMe.startTimer()
-        korisnik = await vratiKorisnika(username)
-    }
-})
+// window.addEventListener('visibilitychange', async function () {
+    // if (document.hidden) {
+    //     const time = Math.round(TimeMe.getTimeOnCurrentPageInSeconds())
+    //     korisnik = await azurirajKorisnika(korisnik, {
+    //         stranica,
+    //         vreme: time
+    //     })
+    // } else {
+    //     TimeMe.stopTimer()
+    //     TimeMe.resetRecordedPageTime(stranica);
+    //     TimeMe.startTimer()
+    //     korisnik = await vratiKorisnika(username)
+    // }
+// })

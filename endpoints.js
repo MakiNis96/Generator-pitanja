@@ -35,7 +35,8 @@ async function upisiKorisnika(username) {
 }
 async function azurirajKorisnika(korisnik, novaAkcija) {
     const id = korisnik ? korisnik.id : -1
-    const akcije = korisnik ? korisnik.akcije : []
+    // const akcije = korisnik ? korisnik.akcije : []
+    const akcije = (await vratiKorisnika(korisnik.username)).akcije
     akcije.push(novaAkcija)
     const response = await fetch(`${backUrl}/korisnici/${id}`, {
         method: 'PUT',

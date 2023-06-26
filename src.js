@@ -1522,28 +1522,32 @@ if (id) {
 //     idleTimeoutInSeconds: 10 // stop recording time due to inactivity
 // });
 
+const start = (new Date()).getTime()
+
 window.onbeforeunload = async function () {
     const time = Math.round(TimeMe.getTimeOnCurrentPageInSeconds())
     korisnik = await azurirajKorisnika(korisnik, {
         stranica,
-        vreme: time
+        vreme: time,
+        start,
+        end: (new Date()).getTime()
     })
 }
 
-window.addEventListener('visibilitychange', async function () {
-    if (document.hidden) {
-        const time = Math.round(TimeMe.getTimeOnCurrentPageInSeconds())
-        korisnik = await azurirajKorisnika(korisnik, {
-            stranica,
-            vreme: time
-        })
-    } else {
-        TimeMe.stopTimer()
-        TimeMe.resetRecordedPageTime(stranica);
-        TimeMe.startTimer()
-        korisnik = await vratiKorisnika(username)
-    }
-})
+// window.addEventListener('visibilitychange', async function () {
+//     if (document.hidden) {
+//         const time = Math.round(TimeMe.getTimeOnCurrentPageInSeconds())
+//         korisnik = await azurirajKorisnika(korisnik, {
+//             stranica,
+//             vreme: time
+//         })
+//     } else {
+//         TimeMe.stopTimer()
+//         TimeMe.resetRecordedPageTime(stranica);
+//         TimeMe.startTimer()
+//         korisnik = await vratiKorisnika(username)
+//     }
+// })
 
 // const primerModelaPitanja = document.getElementById('primerModelaPitanja')
 // document.getElementById('otvoriPrimerModelaPitanja').addEventListener('click', function () {
