@@ -1416,10 +1416,11 @@ btnPosalji.addEventListener('click', async function () {
         pokusaj
     })
 
-    korisnik = await azurirajKorisnika(korisnik, {
+    korisnik = await azurirajKorisnika(username, {
         stranica,
         vreme: time, 
-        pokusaj
+        pokusaj,
+        timestamp: (new Date()).getTime()
     })
     // TimeMe.stopTimer()
     TimeMe.resetRecordedPageTime(stranica);
@@ -1432,11 +1433,17 @@ btnPosalji.addEventListener('click', async function () {
     document.getElementById('podsetikZaSlanje').style.display = 'none'
 })
 
-const uradiKviz = document.getElementById('uradiKviz')
+const laksiItem = document.getElementById('laksi-item')
+const teziItem = document.getElementById('tezi-item')
+const aplikacijaItem = document.getElementById('aplikacija-item')
+const laksiLink = document.getElementById('laksi')
+const teziLink = document.getElementById('tezi')
+const aplikacijaLink = document.getElementById('aplikacija')
 async function otvaranjeZadatka() {
     closeConfirmBox()
     showConfirmBox()
-    uradiKviz.style.display = 'block'
+    laksiItem.style.display = 'flex'
+    teziItem.style.display = 'flex'
 }
 
 let username, id, stranica, korisnik
@@ -1448,10 +1455,20 @@ window.addEventListener('load', async function () {
     if (id) {
         divZadatak.style.display = 'block'
         divZadatak.innerHTML = zadaci[id-1]
-        uradiKviz.style.display = 'block'
+        laksiItem.style.display = 'flex'
+        teziItem.style.display = 'flex'
+        if (id == 1) {
+            laksiItem.classList.add('open-item')
+            laksiLink.classList.add('open-link')
+        } else {
+            teziItem.classList.add('open-item')
+            teziLink.classList.add('open-link')
+        }
     } else {
         divZadatak.style.display = 'none'
         setTimeout(otvaranjeZadatka, timeout)
+        aplikacijaItem.classList.add('open-item')
+        aplikacijaLink.classList.add('open-link')
     }
     try {
         korisnik = await izdvojUsername()
@@ -1526,7 +1543,7 @@ const start = (new Date()).getTime()
 
 window.onbeforeunload = async function () {
     const time = Math.round(TimeMe.getTimeOnCurrentPageInSeconds())
-    korisnik = await azurirajKorisnika(korisnik, {
+    korisnik = await azurirajKorisnika(username, {
         stranica,
         vreme: time,
         start,

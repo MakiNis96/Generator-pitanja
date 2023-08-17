@@ -23,37 +23,26 @@
     
     </head>
     <body>
-        <nav class="navbar bg-warning">
-            <ul style="list-style:none">
+
+        <nav class="main-navbar">
+            <ul style="list-style-type: none">
                 <div style="display:flex;justify-content: space-between;">
-                    <div style="display:flex">
-                        <li><a class="navbar-brand" href="./">Uputstvo</a></li>
-                        <li><a class="navbar-brand" href="./app.html" id="aplikacija">Aplikacija</a></li>
-                        <li style="display:none" id="uradiKviz">
-                            <a class="navbar-brand" style="width:150px" onclick="prosiri()">
-                                Uradi kviz
-                                <span class="fa fa-angle-double-down" id="spanKviz"></span>
-                            </a>
-                            <ul style="list-style:none;display: none;" id="kviz">
-                                <li><a class="navbar-brand" href="./app.html?id=1">Laksi zadatak</a></li>
-                                <li><a class="navbar-brand" href="./app.html?id=2">Tezi zadatak</a></li>
-                            </ul>
-                        </li>
+                    <div class="main-navbar-left" style="padding-left: 10px">
+                        <li class="open-item"><a href="./" class="open-link">Uputstvo</a></li>
+                        <li><a href="./app.html" id="aplikacija">Aplikacija</a></li>
+                        <li id="laksi-item" style="display: none"><a href="./app.html?id=1" id="laksi">Lakši zadatak</a></li>
+                        <li id="tezi-item" style="display: none"><a href="./app.html?id=2" id="tezi">Teži zadatak</a></li>
                     </div>
-                    <div>
-                        <li><a class="navbar-brand">Pozdrav <span id="pozdrav"></span></a></li>
+                    <div class="main-navbar-left" style="padding-right: 10px;">
+                        <li style="color: #999">Pozdrav &nbsp;<span id="pozdrav"></span></li>
                     </div>
                 </div>
             </ul>
         </nav>
 
-
-        <!-- <nav class="navbar bg-warning">
-            <ul class="navBar" style="list-style:none">
-                <li><a class="navbar-brand" href="./">Uputstvo</a></li>
-                <li><a class="navbar-brand" href="./app.html" id="aplikacija">Aplikacija</a></li>
-            </ul>
-        </nav> -->
+        <div style="display: flex;justify-content: center">
+            <div id="serverStop">Server je stopiran, nisu dostupne sve funkcionalnosti aplikacije!</div>
+        </div>
 
         <div class="overlay" id="overlay" hidden>
             <div class="confirm-box">
@@ -73,28 +62,44 @@
         </div>
 
         <div class="con">
-            <div style="color:red; display: none;" id="serverStop">Server je stopiran, nisu dostupne sve funkcionalnosti aplikacije!</div>
+            <ul id="navigacija">
+                <li>Uvod</li>
+                <li>Tekst pitanja i parametri</li>
+                <li>Alternative parametra</li>
+                <li>Zavisnosti alternative</li>
+                <li>Defaultne alternative</li>
+                <li>Postojeći deo pitanja za variranje</li>
+                <li>Šablon odgovora i kriterijumi tačnosti</li>
+                <li>Dodatni elementi korisničkog interfejsa</li>
+                <li>Primer</li>
+            </ul>
 
-            <h2>Generator pitanja</h2>
-            <p>Generator pitanja je aplikacija koja omogućava zadavanje modela pitanja na osnovu koga se generiše više instanci pitanja u GIFT formatu.
-                <br>
-                Definisanje modela pitanja se sastoji iz sledećih koraka: <br>
-                1. Unos teksta pitanja i označavanje delova pitanja za variranje <br>
-                2. Postavljanje alternativa <br>
-                3. Postavljanje defaultne alternative <br>
-                4. Postavljanje zavisnosti alternative <br>
-                5. Ubacivanje postojećeg parametra <br>
-                6. Definisanje šablona odgovora i postavljanje kriterijuma tačnosti <br>
-                Koraci 1. i 2. su obavezni, a 5. je obavezan samo ako korisnik želi pitanja zatvorenog tipa. <br> 
-                Nakon zadavanja modela pitanja, klikom na dugme "Generisi pitanja", prikazaće se kreirane instance pitanja.
-            </p>
-            <a href="./app.html" id="slobodnoKoriscenje">Započnite slobodno korišćenje aplikacije</a>
-            <h3>Unos pitanja i označavanje parametara <span onclick="expand()" class='fa fa-angle-double-down'></span></h3>
-            <div class="helper" style="display:none">
-                <div class="helperSadrzaj">
-                    <img src='slike/sablonPitanja.png' style='width:600px;height:550px'/>
-                    <div class="helperText">
-                        <i> 
+            <!-- <div> -->
+                <div class="con-helper">
+                <h2>Generator pitanja</h2>
+                <hr style="border-top: 3px solid #B68181">
+                <p>Generator pitanja je aplikacija koja omogućava zadavanje modela pitanja na osnovu koga se generiše više instanci pitanja u GIFT formatu.
+                    <br>
+                    Definisanje modela pitanja se sastoji iz sledećih koraka: <br>
+                    1. Unos teksta pitanja i označavanje delova pitanja za variranje <br>
+                    2. Postavljanje alternativa <br>
+                    3. Postavljanje defaultne alternative <br>
+                    4. Postavljanje zavisnosti alternative <br>
+                    5. Ubacivanje postojećeg parametra <br>
+                    6. Definisanje šablona odgovora i postavljanje kriterijuma tačnosti <br>
+                    Koraci 1. i 2. su obavezni, a 5. je obavezan samo ako korisnik želi pitanja zatvorenog tipa. <br> 
+                    Nakon zadavanja modela pitanja, klikom na dugme "Generisi pitanja", prikazaće se kreirane instance pitanja.
+                </p>
+                <a href="./app.html" id="slobodnoKoriscenje">Započnite slobodno korišćenje aplikacije</a>
+                </div>
+
+                <div class="con-helper" style="display:none">
+                <h2>Unos pitanja i označavanje parametara</h2>
+                <hr style="border-top: 3px solid #B68181">
+                <div class="helper">
+                    <div class="helperSadrzaj">
+                        <img src='slike/sablonPitanja.png' style='width:600px;height:550px'/>
+                        <div class="helperText">
                             <ol>
                                 <li>Unos teksta pitanja u polju "Sablon pitanja"</li>
                                 <li>Selektovanje dela teksta kao parametar za variranje pitanja</li> 
@@ -108,35 +113,40 @@
                                 <li>Deo pitanja više nije označen kao parametar i tretira se kao fiksni deo pitanja</li>
                                 <li>Poruka: "Nije moguće obrisati deo pitanja za variranje", ako postoje alternative drugih parametara koje zavise od alternativa parametra za brisanje</li>
                             </ol>
-                        </i>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <h3>Postavljanje alternativa <span onclick="expand()" class='fa fa-angle-double-down'></span></h3>
-            <div class="helper" style="display:none">
-                <div class="helperSadrzaj">
-                    <img src='slike/alternative.png' style='width:260;height:130px'/>
-                    <div class="helperText">
-                        <i>
-                            Alternative parametra su moguće vrednosti parametra u instancama pitanja.
-                            <ol>
-                                <li>Levi klik na već označeni parametar u polju za unos pitanja</li>
-                                <li>Panel za postavljanje mogućih vrednosti parametra
-                                    <ul>
-                                        <li>Postavljanje opsega numeričkih vrednosti</li>
-                                        <li>Postavljanje pojedinačnih vrednosti</li>
-                                    </ul>
-                                </li>
-                            </ol>
-                        </i>
-                    </div>
                 </div>
-                <br>
-                <h4><i>Postavljanje pojedinačnih vrednosti parametra</i></h4>
-                <div class="helperSadrzaj">
-                    <img src='slike/postavljanjePojedinacnihVrednosti.png' style='width:700;height:250px'/>
-                    <div class="helperText">
-                        <i>
+
+                <div class="con-helper" style="display:none">
+                <h2>Postavljanje alternativa parametra</h2>
+                <hr style="border-top: 3px solid #B68181">
+                <div class="helper">
+                    <h4>Alternative parametra</h4>
+                    <hr style="border-top: 3px solid #B68181">
+                    <div class="helperSadrzaj">
+                        <img src='slike/alternative.png' style='width:260;height:130px'/>
+                        <div class="helperText">
+                            <div>
+                                Alternative parametra su moguće vrednosti parametra u instancama pitanja.
+                                <ol>
+                                    <li>Levi klik na već označeni parametar u polju za unos pitanja</li>
+                                    <li>Panel za postavljanje mogućih vrednosti parametra
+                                        <ul style="padding-left:2%;">
+                                            <li>Postavljanje opsega numeričkih vrednosti</li>
+                                            <li>Postavljanje pojedinačnih vrednosti</li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <h4>Postavljanje pojedinačnih vrednosti parametra</h4>
+                    <hr style="border-top: 3px solid #B68181;">
+                    <div class="helperSadrzaj">
+                        <img src='slike/postavljanjePojedinacnihVrednosti.png' style='width:700;height:250px'/>
+                        <div class="helperText">
                             <ol>
                                 <li>Postavljanja pojedinačnih vrednosti</li>
                                 <li>U tekstualnim inputima se definišu moguće vrednosti (alternative) datog parametra</li>
@@ -144,75 +154,74 @@
                                 <li>Dodavanje novog tekstualnog inputa za unos nove alternative</li>
                                 <li>Pamćenje unetih alternativa</li>
                             </ol>
-                        </i>
+                        </div>
                     </div>
-                </div>
-                <div class="helperSadrzaj">
-                    <div class="helperText" style="width:100%">
-                        <i>Generisana pitanja: <br/>
-                        <code>
-                        Koja je najveca drzava u Evropi ? <br/>
-                        Koja je najveca reka u Evropi ? <br/>
-                        Koja je najveca planina u Evropi ? <br/>
-                        Koja je najveca drzava u Aziji ? <br/>
-                        Koja je najveca reka u Aziji ? <br/>
-                        Koja je najveca planina u Aziji ? <br/>
-                        Koja je najveca drzava u Africi ? <br/>
-                        Koja je najveca reka u Africi ? <br/>
-                        Koja je najveca planina u Africi ? <br/>
-                        </code>
-                    </i>
+                    <br/>
+                    <div class="helperSadrzaj">
+                        <div class="helperText" style="width:100%">
+                            Generisana pitanja:
+                            <code>
+                            Koja je najveca drzava u Evropi ? <br/>
+                            Koja je najveca reka u Evropi ? <br/>
+                            Koja je najveca planina u Evropi ? <br/>
+                            Koja je najveca drzava u Aziji ? <br/>
+                            Koja je najveca reka u Aziji ? <br/>
+                            Koja je najveca planina u Aziji ? <br/>
+                            Koja je najveca drzava u Africi ? <br/>
+                            Koja je najveca reka u Africi ? <br/>
+                            Koja je najveca planina u Africi ? <br/>
+                            </code>
+                        </div>
+                        <div class="helperText">
+                            Na slikama je prikazan primer modela pitanja koji ima dva parametra sa zadatim alternativama, kao i generisane instance pitanja.
+                                Kao što se ispod slika može videti, generišu se sve instance pitanja tako što se umeću sve navedene alternative po principu "svaki sa svakim".
+                        </div>
                     </div>
-                    <div class="helperText">
-                        <i>
-                        Na slikama je prikazan primer modela pitanja koji ima dva parametra sa zadatim alternativama, kao i generisane instance pitanja.
-                            Kao što se ispod slika može videti, generišu se sve instance pitanja tako što se umeću sve navedene alternative po principu "svaki sa svakim".
-                        </i>
-                    </div>
-                </div>
-                    
-                <h4><i>Postavljanja opsega numeričkih vrednosti</i></h4>
-                <div class="helperSadrzaj">
-                    <img src='slike/postavljanjeOpsegaBrojeva/pitanje.png' style='width:120;height:40px'/>
-                    <img src='slike/postavljanjeOpsegaBrojeva/opseg.png' style='width:260;height:130px'/>
-                    <div class="helperText">
-                        <i>
+                        
+                    <br>
+                    <h4>Postavljanja opsega numeričkih vrednosti</h4>
+                    <hr style="border-top: 3px solid #B68181">
+                    <div class="helperSadrzaj">
+                        <img src='slike/postavljanjeOpsegaBrojeva/pitanje.png' style='width:120;height:40px'/>
+                        <img src='slike/postavljanjeOpsegaBrojeva/opseg.png' style='width:260;height:130px'/>
+                        <div class="helperText">
                             <ol>
                                 <li>Postavljanja opsega numeričkih vrednosti</li>
                                 <li>Definisanje opsega u kome će biti moguće vrednosti (od kog, do kog broja i sa kojim korakom)</li>
                                 <li>Pamćenje unetih podataka</li>
                             </ol>
-                        </i>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="helperSadrzaj">
+                        <div class="helperText" style="width:100%">
+                            <img src='slike/postavljanjeOpsegaBrojeva/rezultat.png' style='width:260;height:180px'/>
+                        </div>
+                        <div class="helperText">
+                            Na slikama je prikazan primer modela pitanja sa parametrom zadatim kao opseg numeričkih vrednosti, kao i generisane instance pitanja.
+                        </div>
                     </div>
                 </div>
-                <br>
-                <div class="helperSadrzaj">
-                    <div class="helperText" style="width:100%">
-                        <img src='slike/postavljanjeOpsegaBrojeva/rezultat.png' style='width:260;height:180px'/>
-                    </div>
-                    <div class="helperText">
-                        <i>
-                        Na slikama je prikazan primer modela pitanja sa parametrom zadatim kao opseg numeričkih vrednosti, kao i generisane instance pitanja.
-                        </i>
-                    </div>
                 </div>
-            </div>
-            <h3>Postavljanje zavisnosti alternative <span onclick="expand()" class='fa fa-angle-double-down'></span></h3>
-            <div class="helper" style="display:none">
-                <i>
-                Čemu služe zavisnosti alternative?<br>
-                Po defaultu, alternativa jednog parametra se prikazuje u kombinaciji sa svakom 
-                alternativom drugih parametara u generisanim instancama pitanja.
-                Zbog toga, ukoliko želimo da se neka alternativa prikazuje samo u kombinaciji sa određenim
-                alternativama drugih delova za variranje, neophodno je da definišemo sa kojim alternativama
-                želimo da je kombinujemo, odnosno da postavimo njene zavisnosti.
-                <br>
-                </i>
-                <div class="helperSadrzaj">
-                    <img src='slike/zavisnostiAlternative/sema.png' style='width:400;height:500px'/>
-                    <div class="helperText">
-                        <i>
-                            Postavljanje zavisnosti:
+
+                <div class="con-helper" style="display:none">
+                <h2>Postavljanje zavisnosti alternative </h2>
+                <hr style="border-top: 3px solid #B68181">
+                <div class="helper">
+                    <h4>Čemu služe zavisnosti alternative?</h4>
+                    <hr style="border-top: 3px solid #B68181">
+                    Po defaultu, alternativa jednog parametra se prikazuje u kombinaciji sa svakom 
+                    alternativom drugih parametara u generisanim instancama pitanja.
+                    Zbog toga, ukoliko želimo da se neka alternativa prikazuje samo u kombinaciji sa određenim
+                    alternativama drugih delova za variranje, neophodno je da definišemo sa kojim alternativama
+                    želimo da je kombinujemo, odnosno da postavimo njene zavisnosti.
+                    <br>
+                    <br>
+                    <h4>Postavljanje zavisnosti</h4>
+                    <hr style="border-top: 3px solid #B68181">
+                    <div class="helperSadrzaj">
+                        <img src='slike/zavisnostiAlternative/sema.png' style='width:400;height:500px'/>
+                        <div class="helperText">
                             <ol>
                                 <li>Prelazak mišem preko označenog dela za variranje (parametra)</li>
                                 <li>Lista alternativa parametra i za svaku alternativu dugme "Poveži"</li>
@@ -227,72 +236,76 @@
                                 <li>Brisanje zavisnosti</li>
                                 <li>Pamćenje postavljenih zavisnosti</li>
                             </ol>
-                        </i>
+                        </div>
                     </div>
-                </div>
-                <i>
-                    <br/>
-                    <br/>
-                    Primer modela pitanja sa definisanim zavisnostima pojedinih alternativa.
-                    <br/>
-                    <img src='slike/zavisnostiAlternative/pitanje.png' style='width:220px;height:50px'/>
-                    <br/>
-                    <img src='slike/zavisnostiAlternative/parametar1.png' style='width:200px;height:250px'/>
-                    <img src='slike/zavisnostiAlternative/parametar2.png' style='width:200px;height:250px'/>
-                    <img src='slike/zavisnostiAlternative/parametar3.png' style='width:200px;height:250px'/>
-                    <br/>
-                    <img src='slike/zavisnostiAlternative/zavisnostDrzava.png' style='width:500px;height:200px'/>
-                    <img src='slike/zavisnostiAlternative/zavisnostPlanina.png' style='width:500px;height:200px'/>
-                    <img src='slike/zavisnostiAlternative/zavisnostReka.png' style='width:500px;height:200px'/>
-                    <br/>
-                    Generisana pitanja: <br/>
-                    <code>
-                    Koja je najveca drzava u Evropi ? <br/>
-                    Koja je najduza reka u Evropi ? <br/>
-                    Koja je najvisa planina u Evropi ? <br/>
-                    Koja je najveca drzava u Aziji ? <br/>
-                    Koja je najduza reka u Aziji ? <br/>
-                    Koja je najvisa planina u Aziji ? <br/>
-                    Koja je najveca drzava u Africi ? <br/>
-                    Koja je najduza reka u Africi ? <br/>
-                    Koja je najvisa planina u Africi ? <br/>
-                    </code>
-                </i>
-            </div>
-            <h3>Postavljanje defaultne alternative <span onclick="expand()" class='fa fa-angle-double-down'></span></h3>
-            <div class="helper" style="display:none">
-                <div class="helperSadrzaj">
-                    <img src='slike/defaultnaAlternativa.png' style='width:600px;height:500px'/>
-                    <div class="helperText">
-                    <i>
-                        Šta je defaultna alternativa?<br>
-                        Defaultna alternativa parametra je ona alternativa koja se trenutno prikazuje u šablonu pitanja ili odgovora.<br>
-                        Po defaultu, defaultna alternativa je prva uneta alternativa.<br>
-                        <br>
-                        Promena defaultne alternative vam samo omogućava bolji monitoring prilikom definisanja modela pitanja, a ne utiče na generisanje instanci pitanja.
-                        <br>
-                        <br>
-                        Promena defaultne alternative:
-                        <ol>
-                            <li>Prelazak mišem preko dela za variranje</li>
-                            <li>Lista svih alternativa parametra</li>
-                            <li>S leve strane svake alternative je radio input koji je čekiran samo za defaultnu alternativu</li>
-                            <li>Čekiranje radio inputa za novu defaultnu alternativu</li>
-                            <li>Ispod navedenih alternativa je opcija "Prikaži defaultnu alternativu"</li>
-                            <li>Klik na opciju "Prikaži defaultnu alternativu"</li>
-                            <li>Izabrana alternativa postaje nova defaultna i prikazuje se u polju za unos pitanja</li>
-                        </ol>
                         <br/>
-                    </i>
+                        <h4>Primer modela pitanja sa definisanim zavisnostima pojedinih alternativa</h4>
+                        <hr style="border-top: 3px solid #B68181">
+                        <div style="display:flex;flex-wrap: wrap;gap:5px;">
+                            <img src='slike/zavisnostiAlternative/pitanje.png' style='width:220px;height:50px'/>
+                            <br/>
+                            <img src='slike/zavisnostiAlternative/parametar1.png' style='width:200px;height:250px'/>
+                            <img src='slike/zavisnostiAlternative/parametar2.png' style='width:200px;height:250px'/>
+                            <img src='slike/zavisnostiAlternative/parametar3.png' style='width:200px;height:250px'/>
+                            <br/>
+                            <img src='slike/zavisnostiAlternative/zavisnostDrzava.png' style='width:500px;height:200px'/>
+                            <img src='slike/zavisnostiAlternative/zavisnostPlanina.png' style='width:500px;height:200px'/>
+                            <img src='slike/zavisnostiAlternative/zavisnostReka.png' style='width:500px;height:200px'/>
+                        </div>
+                        <br>
+                        Generisana pitanja: <br/>
+                        <code>
+                        Koja je najveca drzava u Evropi ? <br/>
+                        Koja je najduza reka u Evropi ? <br/>
+                        Koja je najvisa planina u Evropi ? <br/>
+                        Koja je najveca drzava u Aziji ? <br/>
+                        Koja je najduza reka u Aziji ? <br/>
+                        Koja je najvisa planina u Aziji ? <br/>
+                        Koja je najveca drzava u Africi ? <br/>
+                        Koja je najduza reka u Africi ? <br/>
+                        Koja je najvisa planina u Africi ? <br/>
+                        </code>
+                </div>
+                </div>
+
+                <div class="con-helper" style="display:none">
+                <h2>Defaultne alternative</h2>
+                <hr style="border-top: 3px solid #B68181">
+                <div class="helper">
+                    <h4>Šta je defaultna alternativa?</h4>
+                    <hr style="border-top: 3px solid #B68181">
+                    Defaultna alternativa parametra je ona alternativa koja se trenutno prikazuje u šablonu pitanja ili odgovora.<br>
+                    Po defaultu, defaultna alternativa je prva uneta alternativa.<br>
+                    Promena defaultne alternative vam samo omogućava bolji monitoring prilikom definisanja modela pitanja, a ne utiče na generisanje instanci pitanja.
+                    <br><br>
+
+                    <h4>Promena defaultne alternative</h4>
+                    <hr style="border-top: 3px solid #B68181">
+                    <div class="helperSadrzaj">
+                        <img src='slike/defaultnaAlternativa.png' style='width:600px;height:500px'/>
+                        <div class="helperText">
+                            <ol>
+                                <li>Prelazak mišem preko dela za variranje</li>
+                                <li>Lista svih alternativa parametra</li>
+                                <li>S leve strane svake alternative je radio input koji je čekiran samo za defaultnu alternativu</li>
+                                <li>Čekiranje radio inputa za novu defaultnu alternativu</li>
+                                <li>Ispod navedenih alternativa je opcija "Prikaži defaultnu alternativu"</li>
+                                <li>Klik na opciju "Prikaži defaultnu alternativu"</li>
+                                <li>Izabrana alternativa postaje nova defaultna i prikazuje se u polju za unos pitanja</li>
+                            </ol>
+                            <br/>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <h3>Ubacivanje postojećeg dela pitanja za variranje <span onclick="expand()" class='fa fa-angle-double-down'></span></h3>
-            <div class="helper" style="display:none">
-                <div class="helperSadrzaj">
-                    <img src='slike/ubacivanjePostojecegParametra.png' style='width:480px;height:400px'/>
-                    <div class="helperText">
-                        <i>
+                </div>
+
+                <div class="con-helper" style="display:none">
+                <h2>Ubacivanje postojećeg dela pitanja za variranje</h2>
+                <hr style="border-top: 3px solid #B68181">
+                <div class="helper">
+                    <div class="helperSadrzaj">
+                        <img src='slike/ubacivanjePostojecegParametra.png' style='width:480px;height:400px'/>
+                        <div class="helperText">
                             <ol>
                                 <li>Desni klik na deo pitanja koji nije označen kao deo za variranje</li>
                                 <li>Lista svih parametara (svaki parametar je predstavljen listom njegovih alternativa u csv formatu)</li>
@@ -301,58 +314,62 @@
                                 <li>Klik na opciju "Ubaci postojeći deo pitanja za variranje"</li>
                                 <li>Postojeći parametar je kopiran na zadatu poziciju sa svim svojim alternativama i njihovim zavisnostima</li>
                             </ol>
-                        </i>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <h3>Unos šablona odgovora i postavljanje kriterijuma tačnosti <span onclick="expand()" class='fa fa-angle-double-down'></span></h3>
-            <div class="helper" style="display:none">
-                <div class="helperSadrzaj">
-                    <i> 
-                        Polja za unos šablona ponuđenih odgovora se popunjavaju na isti način kao i polje za unos pitanja.
-                        I u njima je moguće označiti parametre, postaviti alternative 
-                        za parametar, postaviti zavisnosti za alternative, postaviti defaultne alternative 
-                        i ubaciti već postojeće parametre.
-                        <br><br>
-                        <strong>Razlike kod unosa šablona odgovora u odnosu na unos šablona pitanja:</strong>
-                        <ul>
-                            <li>Moguće je uneti više šablona odgovora</li>
-                            <li>Alternative, pored zavisnosti, mogu da imaju i definisane kriterijume tačnosti</li>
-                            <li>Moguće je označiti delove šablona za evaluiraju</li>
-                        </ul>
-                        <strong>Ograničenja: </strong> 
-                        <ul>
-                            <li>Šablon odgovora može da ima samo jedan parametar odgovora.</li>
-                            <li>Isti parametar odgovora ne može da se koristi više puta.</li>
-                        </ul>
-                    </i>
                 </div>
-                <div class="helperSadrzaj">
-                    <img src='slike/sabloniOdgovora.png' style='width:350px;height:80px'/>
-                    <div class="helperText">
-                        <i>
+
+                <div class="con-helper" style="display:none">
+                <h2>Šablona odgovora i kriterijumi tačnosti </h2>
+                <hr style="border-top: 3px solid #B68181">
+                <div class="helper">
+                    <h4>Unos šablona odgovora</h4>
+                    <hr style="border-top: 3px solid #B68181">
+                    Polja za unos šablona ponuđenih odgovora se popunjavaju na isti način kao i polje za unos pitanja.
+                    I u njima je moguće označiti parametre, postaviti alternative 
+                    za parametar, postaviti zavisnosti za alternative, postaviti defaultne alternative 
+                    i ubaciti već postojeće parametre.
+                    <br><br>
+                    <strong>Razlike kod unosa šablona odgovora u odnosu na unos šablona pitanja:</strong>
+                    <ul style="padding-left:2%;">
+                        <li>Moguće je uneti više šablona odgovora</li>
+                        <li>Alternative, pored zavisnosti, mogu da imaju i definisane kriterijume tačnosti</li>
+                        <li>Moguće je označiti delove šablona za evaluiraju</li>
+                    </ul>
+                    <strong>Ograničenja: </strong> 
+                    <ul style="padding-left:2%;">
+                        <li>Šablon odgovora može da ima samo jedan parametar odgovora.</li>
+                        <li>Isti parametar odgovora ne može da se koristi više puta.</li>
+                    </ul>
+                    <br>
+                    <div class="helperSadrzaj">
+                        <img src='slike/sabloniOdgovora.png' style='width:350px;height:80px'/>
+                        <div class="helperText">
                             <ol>
                                 <li>Polje za unos šablona odgovora</li>
                                 <li>Dodavanje novog šablona odgovora</li>
                                 <li>Brisanje šablona odgovora</li>
                             </ol>
-                        </i>
+                        </div>
                     </div>
-                </div>
-                <br>
-                <div class="helperSadrzaj">
-                    <img src='slike/kriterijumiTacnosti/kriterijumiTacnosti.png' style='width:700px;height:500px'/>
-                    <div class="helperText">
-                        <i> 
-                            Šta je kriterijum tačnosti?
-                            <br>
-                            Kriterijum tačnost je uslov koji određuje kada je ponuđeni odgovor, generisan na osnovu šablona odgovora 
-                            i parametara odgovora, tačan.
-                            Kriterijum tačnosti se vezuje za jednu alternativu u šablonu odgovora.
-                            Korisnik bira parametre i alternative koje učestvuju u izrazu, može da ih povezuje AND-om i 
-                            OR-om i grupiše.
-                            <br><br>
-                            Postavljanje kriterijuma tačnosti
+                    <br>
+
+                    <h4>Šta je kriterijum tačnosti?</h4>
+                    <hr style="border-top: 3px solid #B68181">
+                    <div class="helperSadrzaj">
+                        Kriterijum tačnost je uslov koji određuje kada je ponuđeni odgovor, generisan na osnovu šablona odgovora 
+                        i parametara odgovora, tačan.
+                        Kriterijum tačnosti se vezuje za jednu alternativu u šablonu odgovora.
+                        Korisnik bira parametre i alternative koje učestvuju u izrazu, može da ih povezuje AND-om i 
+                        OR-om i grupiše.
+                    </div>
+                    <br>
+
+                    <h4>Postavljanje kriterijuma tačnosti</h4>
+                    <hr style="border-top: 3px solid #B68181">
+                    <div class="helperSadrzaj">
+                        <img src='slike/kriterijumiTacnosti/kriterijumiTacnosti.png' style='width:500px;height:500px'/>
+                        <div class="helperText">
                             <ol>
                                 <li>Šablon odgovora sa parametrom odgovora</li>
                                 <li>Prelazak mišem preko parametra odgovora</li>
@@ -360,234 +377,224 @@
                                 <li>Klik na dugme "Poveži" za neku alternativu</li>
                                 <li>Panel za postavljanje kriterijuma tačnosti</li>
                             </ol>
-                        </i>
+                        </div>
                     </div>
-                </div>
-                <br>
-                <div class="helperSadrzaj">
-                    <img src='slike/deoEvaluacija.png' style='width:400px;height:450px'/>
-                    <div class="helperText">
-                        <i>
-                            U poljima za unos šablona odgovora moguće je i označiti deo odgovora koji će da se evaluira. Ukoliko taj deo odgovora može matematički da se izračuna, izračunava se i dobijeni rezultat se ubacuje u ponuđenom odgovoru.
-                            <br>
-                            Označavanje dela za evaluaciju u šablonu odgovora:
-                            <ol>
-                                <li>Šablon odgovora (sa jednim parametrom koji ima alternative: +,-,*)</li>
-                                <li>Selektovanje dela šablona odgovora koji treba da se evaluira</li>
-                                <li>Desni klik na selektovani deo</li>
-                                <li>Opcija: "Označi deo odgovora koji treba da se evaluira"</li>
-                                <li>Levi klik na opciju</li>
-                                <li>Selektovani deo je označen kao deo za evaluaciju (tekst je crven i uvećan u odnosu na ostatak šablona)</li>
-                            </ol>
-                            Dobijeni ponuđeni odgovori sa ovako definisanim šablonom odgovora:
-                            <br>
-                            <code>
-                                15<br>
-                                5<br>
-                                50<br>
-                            </code>
-                        </i>
+                    <br>
+
+                    <h4>Šta je deo za evaluaciju u šablonu odgovora?</h4>
+                    <hr style="border-top: 3px solid #B68181">
+                    U poljima za unos šablona odgovora moguće je i označiti deo odgovora koji će da se evaluira. Ukoliko taj deo odgovora može matematički da se izračuna, izračunava se i dobijeni rezultat se ubacuje u ponuđenom odgovoru.
+                    <br><br>
+
+                    <h4>Označavanje dela za evaluaciju u šablonu odgovora</h4>
+                    <hr style="border-top: 3px solid #B68181">
+                    <div class="helperSadrzaj">
+                        <img src='slike/deoEvaluacija.png' style='width:400px;height:450px'/>
+                        <div class="helperText">
+                            <div>
+                                <ol>
+                                    <li>Šablon odgovora (sa jednim parametrom koji ima alternative: +,-,*)</li>
+                                    <li>Selektovanje dela šablona odgovora koji treba da se evaluira</li>
+                                    <li>Desni klik na selektovani deo</li>
+                                    <li>Opcija: "Označi deo odgovora koji treba da se evaluira"</li>
+                                    <li>Levi klik na opciju</li>
+                                    <li>Selektovani deo je označen kao deo za evaluaciju (tekst je crven i uvećan u odnosu na ostatak šablona)</li>
+                                </ol>
+                                Dobijeni ponuđeni odgovori sa ovako definisanim šablonom odgovora:
+                                <br>
+                                <code>
+                                    15<br>
+                                    5<br>
+                                    50<br>
+                                </code>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="helperSadrzaj">
-                   <img src='slike/deoEvaluacija2.png' style='width:350px;height:280px'/>
-                    <div class="helperText">
-                        <i>
-                            Brisanje dela za evaluaciju:
+                    <br>
+
+                    <h4>Brisanje dela za evaluaciju</h4>
+                    <hr style="border-top: 3px solid #B68181">
+                    <div class="helperSadrzaj">
+                    <img src='slike/deoEvaluacija2.png' style='width:350px;height:280px'/>
+                        <div class="helperText">
                             <ol>
                                 <li>Desni klik na već označeni deo za evaluaciju</li>
                                 <li>Klik na opciju: "Ponisti deo odgovora za evaluaciju"</li>
                                 <li>Deo za evaluaciju je poništen</li>
                             </ol>
-                        </i>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <h3>Dodatni elementi korisničkog interfejsa <span onclick="expand()" class='fa fa-angle-double-down'></span></h3>
-            <div class="helper" style="display:none">
-                <div class="helperSadrzaj">
-                    <img src='slike/korisnickiInterfejs.png' style='width:420px;height:300px'/>
-                    <div class="helperText">
-                        <i>
-                        <table>
-                            <tr><th style="width:40%">Dugme</th><th>Značenje</th></tr>
-                            <tr><td><strong>Generisi pitanja</strong></td><td>Pojavljuju se generisana pitanja sa ponuđenim odgovorima ispod labele "Rezultat:"</td></tr>
-                            <tr><td>Obrisi model pitanja</td><td>Brišu se svi uneti podaci</td></tr>
-                            <tr><td><strong>Posalji odgovor</strong></td><td>Šalje se sastavljen model pitanja na server</td></tr>
-                            <tr><td>Sacuvaj model pitanja</td><td>Sastavljen model pitanja se čuva na fajl sistemu</td></tr>
-                            <tr><td>Ucitaj model pitanja</td><td>Ucitava se model pitanja sa fajl sistema</td></tr>
-                        </table>
-                        </i>
+                </div>
+
+                <div class="con-helper" style="display:none">
+                <h2>Dodatni elementi korisničkog interfejsa</h2>
+                <hr style="border-top: 3px solid #B68181">
+                <div class="helper">
+                    <div class="helperSadrzaj">
+                        <img src='slike/korisnickiInterfejs.png' style='width:420px;height:300px'/>
+                        <div class="helperText">
+                            <table>
+                                <tr><th style="width:40%">Dugme</th><th>Značenje</th></tr>
+                                <tr><td><strong>Generisi pitanja</strong></td><td>Pojavljuju se generisana pitanja sa ponuđenim odgovorima ispod labele "Rezultat:"</td></tr>
+                                <tr><td>Obrisi model pitanja</td><td>Brišu se svi uneti podaci</td></tr>
+                                <tr><td><strong>Posalji odgovor</strong></td><td>Šalje se sastavljen model pitanja na server</td></tr>
+                                <tr><td>Sacuvaj model pitanja</td><td>Sastavljen model pitanja se čuva na fajl sistemu</td></tr>
+                                <tr><td>Ucitaj model pitanja</td><td>Ucitava se model pitanja sa fajl sistema</td></tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <h3>Primer<span onclick="expand()" class='fa fa-angle-double-down'></span></h3>
-            <div class="helper" style="display:none">
-                <ol>
-                <div class="helperSadrzaj">
-                    1.,3.<img src='slike/primer/sablonPitanja.png' style='width:400px;height:250px'/>
-                    2.<img src='slike/primer/alternative1.png' style='width:200px;height:250px'/>
-                    <div class="helperText">
-                    <i>
-                        <li>U ovom primeru, polazimo od pitanja "Koja je najveca drzava u Evropi ?".</li>
-                        <li>Želimo da isto pitanje postavimo i za Aziju i Afriku, tako da deo pitanja "Evropi" 
-                            označavamo kao deo pitanja za variranje i specificiramo mu ostale moguće vrednosti: "Aziji" i "Africi".
-                        </li>
-                    </i>
-                    </div>
                 </div>
-                <br>
-                <div class="helperSadrzaj">
-                    4.<img src='slike/primer/alternative2.png' style='width:200px;height:250px'/>
-                    5.<img src='slike/primer/alternative3.png' style='width:200px;height:250px'/>
-                    <div class="helperText">
-                        <i>
+
+                <div class="con-helper" style="display:none">
+                <h2>Primer</h2>
+                <hr style="border-top: 3px solid #B68181">
+                <div class="helper">
+                    <ol>
+                    <div class="helperSadrzaj">
+                        1.,3.<img src='slike/primer/sablonPitanja.png' style='width:400px;height:250px'/>
+                        2.<img src='slike/primer/alternative1.png' style='width:200px;height:250px'/>
+                        <div class="helperText">
+                        <div>
+                            <li>U ovom primeru, polazimo od pitanja "Koja je najveca drzava u Evropi ?".</li>
+                            <li>Želimo da isto pitanje postavimo i za Aziju i Afriku, tako da deo pitanja "Evropi" 
+                                označavamo kao deo pitanja za variranje i specificiramo mu ostale moguće vrednosti: "Aziji" i "Africi".
+                            </li>
+                        </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="helperSadrzaj">
+                        4.<img src='slike/primer/alternative2.png' style='width:200px;height:250px'/>
+                        5.<img src='slike/primer/alternative3.png' style='width:200px;height:250px'/>
+                        <div class="helperText">
+                            <div>
                             <li>Ovo pitanje želimo da postavimo i za najdužu reku i najvišu planinu, 
                                 tako da "najveca" i "drzava" takođe označavamo kao delove pitanja za variranje.</li>
                             <li>Umesto teksta "najveca" navodimo da može da bude i "najduza" i "najvisa"</li>
                             <li>Umesto teksta "drzava" može da bude i "reka" i "planina"</li>
-                        </i>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <br>
-                <div class="helperSadrzaj">
-                    6.<img src='slike/primer/zavisnosti1.png' style='width:430px;height:250px'/>
-                    <div class="helperText">
-                        <i>
-                           <li>"drzava" treba da ide samo uz "najveca"</li>
-                        </i>
+                    <br>
+                    <div class="helperSadrzaj">
+                        6.<img src='slike/primer/zavisnosti1.png' style='width:430px;height:250px'/>
+                        <div class="helperText">
+                            <li>"drzava" treba da ide samo uz "najveca"</li>
+                        </div>
                     </div>
-                </div>
-                <br>
-                <div class="helperSadrzaj">
-                    7.<img src='slike/primer/zavisnosti2.png' style='width:430px;height:250px'/>
-                    <div class="helperText">
-                        <i>
-                           <li>"reka" samo uz "najduza"</li>
-                        </i>
+                    <br>
+                    <div class="helperSadrzaj">
+                        7.<img src='slike/primer/zavisnosti2.png' style='width:430px;height:250px'/>
+                        <div class="helperText">
+                            <li>"reka" samo uz "najduza"</li>
+                        </div>
                     </div>
-                </div>
-                <br>
-                <div class="helperSadrzaj">
-                    8.<img src='slike/primer/zavisnosti3.png' style='width:430px;height:250px'/>
-                    <div class="helperText">
-                        <i>
-                           <li>"planina" samo uz "najvisa"</li>
-                        </i>
+                    <br>
+                    <div class="helperSadrzaj">
+                        8.<img src='slike/primer/zavisnosti3.png' style='width:430px;height:250px'/>
+                        <div class="helperText">
+                            <li>"planina" samo uz "najvisa"</li>
+                        </div>
                     </div>
-                </div>
-                <br>
-                <div class="helperSadrzaj">
-                    9.<img src='slike/primer/alternative4.png' style='width:200px;height:400px'/>
-                    10.<img src='slike/primer/ukrajina.png' style='width:450px;height:400px'/>
-                    <div class="helperText">
-                        <i>
-                           <li>Odgovor na svaku instancu pitanja generisanu ovim modelom je naziv drzave, reke ili planine.
-                            Stoga, imamo jedan šablon odgovora koji ima jedan parametar čije su vrednosti nazivi koji predstavljaju tačne odgovore</li>
-                            <li>
-                                Dodatno smo hteli da ako je pitanje vezano za drzavu da se kao ponuđeni odgovori prikazuju samo 
-                            nazivi drzava, ako je vezano za reku samo nazivi reka, a ako je vezano za planinu samo nazivi planina,
-                            što smo postigli postavljanjem zavisnosti za alternative parametra odgovora.
-                            Za svaku alternativu parametra odgovora definisali smo i kriterijum tačnosti.
-                            Tako na primer, odgovor "Ukrajina" se prikazuje samo ako parametar "drzava;reka;planina" ima 
-                            vrednost "drzava" i on je tačan odgovor ako parametar "Evropi;Aziji;Africi" ima vrednost "Evropi".
-                            Analogno ovome, definisali smo i zavisnosti i kriterijume tačnosti i za ostale parametre odgovora.
-                            </li>
-                            <li>
-                                Dobijeni rezultati, odnosno generisane instance pitanja.
-                            </li>
-                        </i>
+                    <br>
+                    <div class="helperSadrzaj">
+                        9.<img src='slike/primer/alternative4.png' style='width:200px;height:400px'/>
+                        10.<img src='slike/primer/ukrajina.png' style='width:450px;height:400px'/>
+                        <div class="helperText">
+                            <div>
+                                <li>Odgovor na svaku instancu pitanja generisanu ovim modelom je naziv drzave, reke ili planine.
+                                    Stoga, imamo jedan šablon odgovora koji ima jedan parametar čije su vrednosti nazivi koji predstavljaju tačne odgovore</li>
+                                <li>
+                                    Dodatno smo hteli da ako je pitanje vezano za drzavu da se kao ponuđeni odgovori prikazuju samo 
+                                    nazivi drzava, ako je vezano za reku samo nazivi reka, a ako je vezano za planinu samo nazivi planina,
+                                    što smo postigli postavljanjem zavisnosti za alternative parametra odgovora.
+                                    Za svaku alternativu parametra odgovora definisali smo i kriterijum tačnosti.
+                                    Tako na primer, odgovor "Ukrajina" se prikazuje samo ako parametar "drzava;reka;planina" ima 
+                                    vrednost "drzava" i on je tačan odgovor ako parametar "Evropi;Aziji;Africi" ima vrednost "Evropi".
+                                    Analogno ovome, definisali smo i zavisnosti i kriterijume tačnosti i za ostale parametre odgovora.
+                                </li>
+                                <li>
+                                    Dobijeni rezultati, odnosno generisane instance pitanja.
+                                </li>
+                            </div>
+                        </div>
                     </div>
+                    <br>
+                    <div class="helperSadrzaj">
+                        10.<img src='slike/primer/rusija.png' style='width:450px;height:400px'/>
+                        <img src='slike/primer/alzir.png' style='width:450px;height:400px'/>
+                    </div>
+                    <br/>
+                    <div class="helperSadrzaj">
+                        10.<img src='slike/primer/volga.png' style='width:450px;height:400px'/>
+                        11.<code>
+                            Koja je najveca drzava u Evropi ?<br/>
+                            {<br/>
+                            =Ukrajina.<br/>
+                            ~Rusija.<br/>
+                            ~Alzir.<br/>
+                            }<br/>
+                            Koja je najveca drzava u Aziji ?<br/>
+                            {<br/>
+                            ~Ukrajina.<br/>
+                            =Rusija.<br/>
+                            ~Alzir.<br/>
+                            }<br/>
+                            Koja je najveca drzava u Africi ?<br/>
+                            {<br/>
+                            ~Ukrajina.<br/>
+                            ~Rusija.<br/>
+                            =Alzir.<br/>
+                            }<br/>
+                            Koja je najduza reka u Evropi ?<br/>
+                            {<br/>
+                            ~Nil.<br/>
+                            ~Ob.<br/>
+                            =Volga.<br/>
+                            }<br/>
+                            Koja je najduza reka u Aziji ?<br/>
+                            {<br/>
+                            ~Nil.<br/>
+                            =Ob.<br/>
+                            ~Volga.<br/>
+                            }<br/>
+                        </code>
+                        <code>
+                            Koja je najduza reka u Africi ?<br/>
+                            {<br/>
+                            =Nil.<br/>
+                            ~Ob.<br/>
+                            ~Volga.<br/>
+                            }<br/>
+                            Koja je najvisa planina u Evropi ?<br/>
+                            {<br/>
+                            ~Himalaji.<br/>
+                            =Elbrus.<br/>
+                            ~Kilimandzaro.<br/>
+                            }<br/>
+                            Koja je najvisa planina u Aziji ?<br/>
+                            {<br/>
+                            =Himalaji.<br/>
+                            ~Elbrus.<br/>
+                            ~Kilimandzaro.<br/>
+                            }<br/>
+                            Koja je najvisa planina u Africi ?<br/>
+                            {<br/>
+                            ~Himalaji.<br/>
+                            ~Elbrus.<br/>
+                            =Kilimandzaro.<br/>
+                            }<br/>
+                        </code>
+                    </div>
+                    </ol>
                 </div>
-                <br>
-                <div class="helperSadrzaj">
-                    10.<img src='slike/primer/rusija.png' style='width:450px;height:400px'/>
-                    <img src='slike/primer/alzir.png' style='width:450px;height:400px'/>
                 </div>
-                <br/>
-                <div class="helperSadrzaj">
-                    10.<img src='slike/primer/volga.png' style='width:450px;height:400px'/>
-                    11.<code>
-                        Koja je najveca drzava u Evropi ?<br/>
-                        {<br/>
-                        =Ukrajina.<br/>
-                        ~Rusija.<br/>
-                        ~Alzir.<br/>
-                        }<br/>
-                        Koja je najveca drzava u Aziji ?<br/>
-                        {<br/>
-                        ~Ukrajina.<br/>
-                        =Rusija.<br/>
-                        ~Alzir.<br/>
-                        }<br/>
-                        Koja je najveca drzava u Africi ?<br/>
-                        {<br/>
-                        ~Ukrajina.<br/>
-                        ~Rusija.<br/>
-                        =Alzir.<br/>
-                        }<br/>
-                        Koja je najduza reka u Evropi ?<br/>
-                        {<br/>
-                        ~Nil.<br/>
-                        ~Ob.<br/>
-                        =Volga.<br/>
-                        }<br/>
-                        Koja je najduza reka u Aziji ?<br/>
-                        {<br/>
-                        ~Nil.<br/>
-                        =Ob.<br/>
-                        ~Volga.<br/>
-                        }<br/>
-                    </code>
-                    <code>
-                        Koja je najduza reka u Africi ?<br/>
-                        {<br/>
-                        =Nil.<br/>
-                        ~Ob.<br/>
-                        ~Volga.<br/>
-                        }<br/>
-                        Koja je najvisa planina u Evropi ?<br/>
-                        {<br/>
-                        ~Himalaji.<br/>
-                        =Elbrus.<br/>
-                        ~Kilimandzaro.<br/>
-                        }<br/>
-                        Koja je najvisa planina u Aziji ?<br/>
-                        {<br/>
-                        =Himalaji.<br/>
-                        ~Elbrus.<br/>
-                        ~Kilimandzaro.<br/>
-                        }<br/>
-                        Koja je najvisa planina u Africi ?<br/>
-                        {<br/>
-                        ~Himalaji.<br/>
-                        ~Elbrus.<br/>
-                        =Kilimandzaro.<br/>
-                        }<br/>
-                    </code>
-                </div>
-                </ol>
-            </div>
+
+            <!-- </div> -->
         </div>
         
-        <script>
-            function expand() {
-                const uputstvo = event.target.parentNode.nextElementSibling
-                uputstvo.style.display = uputstvo.style.display == 'none' ? 'block' : 'none'
-                event.target.className = event.target.className == 'fa fa-angle-double-up' ? 'fa fa-angle-double-down' : 'fa fa-angle-double-up'
-            }
-            function prosiri() {
-                const kviz = document.getElementById('kviz')
-                const spanKviz = document.getElementById('spanKviz')
-                if (kviz.style.display === 'block') {
-                    kviz.style.display = 'none'
-                    spanKviz.className = 'fa fa-angle-double-down'
-                } else {
-                    kviz.style.display = 'block'
-                    spanKviz.className = 'fa fa-angle-double-up'
-                }
-            }
-        </script>
         <script src="index.js" type="module"></script>
         <script src="timeme.js"></script>
         <script src="https://smtpjs.com/v3/smtp.js"></script>

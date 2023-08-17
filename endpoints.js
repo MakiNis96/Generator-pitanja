@@ -33,10 +33,31 @@ async function upisiKorisnika(username) {
     const korisnik = await response.json()
     return korisnik
 }
-async function azurirajKorisnika(korisnik, novaAkcija) {
-    const id = korisnik ? korisnik.id : -1
-    // const akcije = korisnik ? korisnik.akcije : []
-    const akcije = (await vratiKorisnika(korisnik.username)).akcije
+// async function azurirajKorisnika(korisnik, novaAkcija) {
+//     const id = korisnik ? korisnik.id : -1
+//     // const korisnik = (await vratiKorisnika(username))
+//     // const id = korisnik.id
+//     const akcije = korisnik.akcije
+//     akcije.push(novaAkcija)
+//     const response = await fetch(`${backUrl}/korisnici/${id}`, {
+//         method: 'PUT',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({
+//             id,
+//             username: korisnik.username,
+//             akcije
+//         })
+//     })
+//     const azurniKorisnik = await response.json()
+//     return azurniKorisnik
+// }
+async function azurirajKorisnika(username, novaAkcija) {
+    // const id = korisnik ? korisnik.id : -1
+    const korisnik = (await vratiKorisnika(username))
+    const id = korisnik.id
+    const akcije = korisnik.akcije
     akcije.push(novaAkcija)
     const response = await fetch(`${backUrl}/korisnici/${id}`, {
         method: 'PUT',
@@ -45,7 +66,7 @@ async function azurirajKorisnika(korisnik, novaAkcija) {
         },
         body: JSON.stringify({
             id,
-            username: korisnik.username,
+            username,
             akcije
         })
     })
@@ -53,13 +74,15 @@ async function azurirajKorisnika(korisnik, novaAkcija) {
     return azurniKorisnik
 }
 
-const uradiKviz = document.getElementById('uradiKviz')
+const laksiItem = document.getElementById('laksi-item')
+const teziItem = document.getElementById('tezi-item')
 async function izdvojUsername() {
     const cookies = document.cookie.split(';')
     const cookieUsername = cookies.find(cookie => cookie.split('=')[0].includes('username'))
     let username = cookieUsername ? cookieUsername.split('=')[1] : null
     if (username) {
-        uradiKviz.style.display = 'block'
+        laksiItem.style.display = 'flex'
+        teziItem.style.display = 'flex'
     }
     while(!username) {
         username = prompt('Unesite korisnicko ime kako bismo Vas pozdravili')
