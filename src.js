@@ -1,7 +1,7 @@
 import { generisiPitanja, parseQuery } from './generator.js'
 import { podaci } from './podaci.js'
 import { CrtanjeHTMLElemenata } from './basic.js'
-import { posaljiOdgovor, izdvojUsername, alertKviz, timeout, azurirajKorisnika, vratiKorisnika } from './endpoints.js'
+// import { posaljiOdgovor, izdvojUsername, alertKviz, timeout, azurirajKorisnika, vratiKorisnika } from './endpoints.js'
 import { zadaci } from './zadaci.js'
 
 const contextMenu = document.getElementById('menu')
@@ -1400,38 +1400,38 @@ e.preventDefault();
 });
 
 const divZadatak = document.getElementById('div-zadatak')
-const btnPosalji = document.getElementById('posaljiOdgovor')
+// const btnPosalji = document.getElementById('posaljiOdgovor')
 
-btnPosalji.addEventListener('click', async function () {
-    zapamtiSablone()
+// btnPosalji.addEventListener('click', async function () {
+    // zapamtiSablone()
 
-    const time = Math.round(TimeMe.getTimeOnCurrentPageInSeconds())
-    const akcijeKorisnika = korisnik.akcije.filter(akcija => (akcija.stranica === stranica) && akcija.pokusaj)
-    akcijeKorisnika.sort((a, b) => b.pokusaj - a.pokusaj)
-    const pokusaj = akcijeKorisnika.length > 0 ? akcijeKorisnika[0].pokusaj + 1 : 1
-    await posaljiOdgovor({
-        zadatakId: id,
-        username: username,    
-        odgovor: podaci,
-        pokusaj
-    })
+    // const time = Math.round(TimeMe.getTimeOnCurrentPageInSeconds())
+    // const akcijeKorisnika = korisnik.akcije.filter(akcija => (akcija.stranica === stranica) && akcija.pokusaj)
+    // akcijeKorisnika.sort((a, b) => b.pokusaj - a.pokusaj)
+    // const pokusaj = akcijeKorisnika.length > 0 ? akcijeKorisnika[0].pokusaj + 1 : 1
+    // await posaljiOdgovor({
+    //     zadatakId: id,
+    //     username: username,    
+    //     odgovor: podaci,
+    //     pokusaj
+    // })
 
-    korisnik = await azurirajKorisnika(username, {
-        stranica,
-        vreme: time, 
-        pokusaj,
-        timestamp: (new Date()).getTime()
-    })
-    // TimeMe.stopTimer()
-    TimeMe.resetRecordedPageTime(stranica);
-    // TimeMe.startTimer()
+    // korisnik = await azurirajKorisnika(username, {
+    //     stranica,
+    //     vreme: time, 
+    //     pokusaj,
+    //     timestamp: (new Date()).getTime()
+    // })
+    // // TimeMe.stopTimer()
+    // TimeMe.resetRecordedPageTime(stranica);
+    // // TimeMe.startTimer()
 
-    alert(`${id ? 'Odgovor' : 'Model pitanja'} je uspesno poslat.`)
-    if (id === 1) {
-        showDialog2()
-    }
-    document.getElementById('podsetikZaSlanje').style.display = 'none'
-})
+    // alert(`${id ? 'Odgovor' : 'Model pitanja'} je uspesno poslat.`)
+    // if (id === 1) {
+    //     showDialog2()
+    // }
+    // document.getElementById('podsetikZaSlanje').style.display = 'none'
+// })
 
 const laksiItem = document.getElementById('laksi-item')
 const teziItem = document.getElementById('tezi-item')
@@ -1451,7 +1451,7 @@ window.addEventListener('load', async function () {
     const urlSearchParams = window.location.search
     const params = new URLSearchParams(urlSearchParams)
     id = Number(params.get('id'))
-    btnPosalji.style.display = id ? 'block' : 'none'
+    // btnPosalji.style.display = id ? 'block' : 'none'
     if (id) {
         divZadatak.style.display = 'block'
         divZadatak.innerHTML = zadaci[id-1]
@@ -1466,24 +1466,24 @@ window.addEventListener('load', async function () {
         }
     } else {
         divZadatak.style.display = 'none'
-        setTimeout(otvaranjeZadatka, timeout)
+        // setTimeout(otvaranjeZadatka, timeout)
         aplikacijaItem.classList.add('open-item')
         aplikacijaLink.classList.add('open-link')
     }
     try {
-        korisnik = await izdvojUsername()
+        // korisnik = await izdvojUsername()
     } catch(error) {
         window.open('/', '_self')
     }
 
-    username = korisnik.username
-    document.getElementById('pozdrav').innerHTML = username
-    stranica = `zadatak-${id || 0}`
+    // username = korisnik.username
+    // document.getElementById('pozdrav').innerHTML = username
+    // stranica = `zadatak-${id || 0}`
 
-    TimeMe.initialize({
-        currentPageName: stranica, // page name
-        idleTimeoutInSeconds: 10 // stop recording time due to inactivity
-    });
+    // TimeMe.initialize({
+    //     currentPageName: stranica, // page name
+    //     idleTimeoutInSeconds: 10 // stop recording time due to inactivity
+    // });
 })
 
 function showConfirmBox() {
@@ -1498,58 +1498,58 @@ function otvoriZadatak(idZadatka) {
     window.open(`./app.html?id=${idZadatka}`, '_target')
 }
  
-document.getElementById('btnPrvi').addEventListener('click', () => {
-    alertKviz()
-    otvoriZadatak('1')
-})
-document.getElementById('btnDrugi').addEventListener('click', () => {
-    alertKviz()
-    otvoriZadatak('2')
-})
-document.getElementById('btnPodseti').addEventListener('click',  () => {
-    alertKviz()
-    closeConfirmBox()
-    setTimeout(otvaranjeZadatka, timeout)
-})
-document.getElementById('btnNe').addEventListener('click', () => {
-    alertKviz()
-    closeConfirmBox()
-})
+// document.getElementById('btnPrvi').addEventListener('click', () => {
+//     alertKviz()
+//     otvoriZadatak('1')
+// })
+// document.getElementById('btnDrugi').addEventListener('click', () => {
+//     alertKviz()
+//     otvoriZadatak('2')
+// })
+// document.getElementById('btnPodseti').addEventListener('click',  () => {
+//     alertKviz()
+//     closeConfirmBox()
+//     setTimeout(otvaranjeZadatka, timeout)
+// })
+// document.getElementById('btnNe').addEventListener('click', () => {
+//     alertKviz()
+//     closeConfirmBox()
+// })
 
-document.getElementById('btnClose').addEventListener('click', () => {
-    closeConfirmBox()
-    closeDialog2()
-})
+// document.getElementById('btnClose').addEventListener('click', () => {
+//     closeConfirmBox()
+//     closeDialog2()
+// })
 
-function showDialog2() {
-    document.getElementById("overlay2").hidden = false;
-}
-function closeDialog2() {
-    document.getElementById("overlay2").hidden = true;
-}
-document.getElementById('btnYes').addEventListener('click', () => otvoriZadatak(2))
-document.getElementById('btnNo').addEventListener('click', closeDialog2)
+// function showDialog2() {
+//     document.getElementById("overlay2").hidden = false;
+// }
+// function closeDialog2() {
+//     document.getElementById("overlay2").hidden = true;
+// }
+// document.getElementById('btnYes').addEventListener('click', () => otvoriZadatak(2))
+// document.getElementById('btnNo').addEventListener('click', closeDialog2)
 
-if (id) {
-    document.getElementById('tekstZadatak').style.display = 'block'
-}
+// if (id) {
+//     document.getElementById('tekstZadatak').style.display = 'block'
+// }
 
 // TimeMe.initialize({
 //     currentPageName: stranica, // page name
 //     idleTimeoutInSeconds: 10 // stop recording time due to inactivity
 // });
 
-const start = (new Date()).getTime()
+// const start = (new Date()).getTime()
 
-window.onbeforeunload = async function () {
-    const time = Math.round(TimeMe.getTimeOnCurrentPageInSeconds())
-    korisnik = await azurirajKorisnika(username, {
-        stranica,
-        vreme: time,
-        start,
-        end: (new Date()).getTime()
-    })
-}
+// window.onbeforeunload = async function () {
+//     const time = Math.round(TimeMe.getTimeOnCurrentPageInSeconds())
+//     korisnik = await azurirajKorisnika(username, {
+//         stranica,
+//         vreme: time,
+//         start,
+//         end: (new Date()).getTime()
+//     })
+// }
 
 // window.addEventListener('visibilitychange', async function () {
 //     if (document.hidden) {
